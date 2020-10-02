@@ -1,2 +1,2 @@
-# cs326-final-GroupBFJ
+# cs326-final-Beta
 Repo for CS326 Group Project. Our Group Name is Beta. Group: Brian(Zheyuan Zhang), Fangming(Fangming Cheng), Jenny(Jenny Guo).
