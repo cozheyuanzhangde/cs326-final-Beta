@@ -1,2 +1,5 @@
-# cs326-final-beta
-Repo for CS326 Group Project. Our Group Name is Beta. Group: Brian(Zheyuan Zhang), Fangming(Fangming Cheng), Jenny(Jenny Guo).
+# CS326 Web Programming
+
+This is the Github Repo for CS326 Final Project - Find Your Course!
+
+> **docs** - this folder is used to store all document, e.g. ideas and wireframes.
