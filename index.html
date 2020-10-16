@@ -6,13 +6,14 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1c15067c0b.js" crossorigin="anonymous"></script>
 
     <title>FindUrCourse!</title>
   </head>
   <body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
@@ -33,5 +34,39 @@
       </div>
     </nav>
 
+    <div class="jumbotron">
+      <div class="custom-container container">
+        <br><br>
+        <h1 style="font-weight: 400;" class="display-4 unselectable">Find Your Desired Course</h1>
+        <h1 style="font-weight: 400;" class="display-4 unselectable">Much EASIER than Before!</h1>
+        <p style="font-weight: 400;" class="lead unselectable">You can rank the course by level of Overall/Difficulty/Time.</p>
+      </div>
+      <br>
+
+      <br>
+      <div class="custom-container container">
+        <form>
+          <div class="form-row">
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="School Name(UMass)">
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="Course Subject(CS)">
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="Course Number(326)">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+          </div>
+        </form>
+        <br>
+        <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" title="Search Tip" data-content="Hi! User, if you want to search for a course, in order to get an accurate result, try to be specific about the School Name. For example, UMass has about 4 campuses, you can enter 'UMass Amherst' instead of 'UMass'. For Course Subject, you can just use the common shorthand for a certain course. By the way, you don't need to worry about the upper case or lower case! Have a great time finding your desired course!">Don't know how to search? Click this!</button>
+        <script>
+          $(document).ready(function(){
+              $('[data-toggle="popover"]').popover();   
+          });
+        </script>
+      </div>
+    </div>
   </body>
 </html>
