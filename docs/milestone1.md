@@ -1,17 +1,17 @@
 # Milestone 1: Project Wireframes
 ## 1. Wireframes
 The wireframes are collaboratively designed by us before we actually working onto the HTML/CSS, therefore there will have changes make to it in the actual design of the user interface.
-![Main(Index) Page:](wireframes_imgs/wireframe_index@1.25x.png)
+![Main(Index) Page:](wireframe_imgs/wireframe_index@1.25x.png)
 
-![Search Result Page:](wireframes_imgs/wireframe_searchresult@1.25x.png)
+![Search Result Page:](wireframe_imgs/wireframe_searchresult@1.25x.png)
 
-![Course Detail Page:](wireframes_imgs/wireframe_coursedetail@1.25x.png)
+![Course Detail Page:](wireframe_imgs/wireframe_coursedetail@1.25x.png)
 
-![User Login Page:](wireframes_imgs/wireframe_userlogin@1.25x.png)
+![User Login Page:](wireframe_imgs/wireframe_userlogin@1.25x.png)
 
-![User Signup Page:](wireframes_imgs/wireframe_usersignup@1.25x.png)
+![User Signup Page:](wireframe_imgs/wireframe_usersignup@1.25x.png)
 
-![User Info Page:](wireframes_imgs/wireframe_userinfo@1.25x.png)
+![User Info Page:](wireframe_imgs/wireframe_userinfo@1.25x.png)
 
 ## 2. HTML and CSS
 
