@@ -6,3 +6,17 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.jumbotron {
+    background-image: url("../images/jumbotron-1.jpg");
+    background-size: cover;
+    min-height: 100vh
+}
+
+.container.jumbotron {
+    padding-left: 30px;
+}
+
+.container.custom-container {
+    margin-left: 1%;
+}
