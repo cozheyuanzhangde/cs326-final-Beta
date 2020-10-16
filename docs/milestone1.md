@@ -2,7 +2,7 @@
 ## 1. Wireframes
 The wireframes are collaboratively designed by us before we actually working onto the HTML/CSS, therefore there will have changes make to it in the actual design of the user interface.
 ![Wireframes:](wireframe_imgs/mergedWireframes.jpg)
-All wireframes are separately stored in Github. Check the link: [Folder](wireframe_imgs/)
+All wireframes are separately stored in Github. Check the link: [folder](wireframe_imgs/)
 
 ## 2. HTML and CSS
 
