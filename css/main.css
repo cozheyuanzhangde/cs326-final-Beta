@@ -20,3 +20,8 @@
 .container.custom-container {
     margin-left: 1%;
 }
+
+.centerized {
+    margin-left: auto;
+    margin-right: auto;
+}
