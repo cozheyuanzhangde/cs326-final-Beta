@@ -17,7 +17,7 @@ The wireframes are collaboratively designed by us before we actually working ont
 All wireframes are separately stored in Github. Check the link: [folder](wireframe_imgs/)
 
 ## 2. HTML and CSS
-
+The 
 
 
 ## 3. Breakdown of the Division of Labor
@@ -34,12 +34,14 @@ Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
 
  1. Website wireframes overall design.
  2. Coding(HTML&CSS): Course Detail page and User Login page.
- 3. Coding(JavaScript): Affects and automatic increased comments in Course Detail page.
- 4. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
+ 3. Coding(JavaScript): Affects in Course Detail page.
+ 4. Coding(JavaScript): Automatic increased comments in Course Detail page.
+ 5. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
 
  1. Website wireframes overall design.
  2. Coding(HTML&CSS): Search Results page and User Signup page.
- 3. Coding(JavaScript): Affects and automatic increased searched results in Search Results page.
- 4. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
+ 3. Coding(JavaScript): Affects in Search Results page.
+ 4. Coding(JavaScript): Automatic increased comments in Search Results page.
+ 5. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
