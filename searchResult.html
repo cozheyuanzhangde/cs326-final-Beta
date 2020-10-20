@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/1c15067c0b.js" crossorigin="anonymous"></script>
         <meta charset="UTF-8" />
         <script type="module" src="./js/onload.js" defer></script>
         <title>searchResult</title>
@@ -15,13 +16,7 @@
         </style>
     </head>
     <body onLoad="doIt()" class="text-dark">
-        <!-- <div class="p-3 mb-2 bg-warning text-dark"> -->
-        <div class="container">
-            <br>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
-            <h1 style="font-weight: 600; font-weight: bold; color: beige">FindYourCourse</h1>
-            </nav>
-            <br><br>
+        
             <nav class="navbar navbar-expand-lg navbar-dark bg-light">
                 <div class="container-fluid">
                   <div class="navbar-header">
@@ -49,37 +44,38 @@
                     </div>
                   </ul>
                   <ul class='nav navbar-nav navbar-right'>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#"><span class="fas fa-user-plus"></span> Sign Up</a>
+                    <li class="nav-itemv">
+                      <a class="nav-link text-dark" href="#"><span class="fas fa-user-plus text-dark"></span> Sign Up</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+                      <a class="nav-link text-dark" href="#"><span class="fas fa-sign-in-alt text-dark"></span> Login</a>
                     </li>
                   </ul>
                 </div>
               </nav>
             <br>
-            <center>
                 <!-- <div class="btn-group nav justify-content-end" role="group" aria-label="Button group with nested dropdown"> -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Rank by Difficulty/Time consumption/Overall
-                    </button>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Easy level</a>
-                    <a class="dropdown-item" href="#">Time-saving level</a>
-                    <a class="dropdown-item" href="#">Overall</a>
-                    </div>
-                </div>
+                <div class="custom-container container mx-auto">
+                          <div class="btn-group float-right" style="max-width: 5rem;">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rank by Difficulty/Time consumption/Overall
+                            </button>
+                            <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Easy level</a>
+                            <a class="dropdown-item" href="#">Time-saving level</a>
+                            <a class="dropdown-item" href="#">Overall</a>
+                            </div>
+                        </div>
+            </div>
                 <!-- </div> -->
-            </center>
+            
 
             <!-- searching details form -->
             <br>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-            <div class = "text-black" style= "color:rgba(0, 0, 0, 0.699)">
+            
                 <br>
-                <div class="card-header" style="width: 1080px;">
+                <div class="card bg-secondary text-white border-0 mx-auto" style="width: 80rem;">
+                <div class="card-header">
                 <div class="row" class = "card-body">
                     <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Course Name</p>
@@ -98,9 +94,8 @@
                     </div>
                 </div>
                 </div>
-                <thead class="thead-light">
-                <div class="detail-container font-weight-bolder" id="searchDetail" style="width: 1100px;">
-                </thead>
+                <div class="bg-light text-dark" id="searchDetail">
+                 </div>
                     <!-- <div class="row">
                         <div class="col-sm">
                             Course Name
@@ -120,7 +115,7 @@
                     </div> -->
                 </div>
             </div>
-        </div>
+        
     </nav>
         <!-- </div> -->
     </body>
