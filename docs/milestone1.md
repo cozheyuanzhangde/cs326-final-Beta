@@ -18,17 +18,17 @@ All wireframes are separately stored in Github. Check the link: [folder](wirefra
 
 ## 2. HTML and CSS
 ### Index page:
-![Index page](wireframe_imgs/mergedWireframes.jpg)
+![Index page](screen_captures/index(main).png)
 ### Search Result page:
-![Search Result page](wireframe_imgs/mergedWireframes.jpg)
+![Search Result page](screen_captures/search_result.png)
 ### Course Detail page:
-![Course Detail page](wireframe_imgs/mergedWireframes.jpg)
-### User Login page:
-![User Login page](wireframe_imgs/mergedWireframes.jpg)
-### User Signup page:
-![User Signup page](wireframe_imgs/mergedWireframes.jpg)
+![Course Detail page](screen_captures/course_detail.png)
 ### User Info(Profile) page:
-![User Info(Profile) page](wireframe_imgs/mergedWireframes.jpg)
+![User Info(Profile) page](screen_captures/userinfo.png)
+### User Signup page:
+![User Signup page](screen_captures/sign_up.png)
+### User Login page:
+![User Login page](screen_captures/login.png)
 
 
 ## 3. Breakdown of the Division of Labor
