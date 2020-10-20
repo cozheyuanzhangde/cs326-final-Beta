@@ -24,18 +24,20 @@ All wireframes are separately stored in Github. Check the link: [folder](wirefra
 
 Zheyuan(Brian) Zhang (Email: zheyuanzhang@umass.edu Github: cozheyuanzhangde) :
  1. Innovated website ideas including main functionalities and uniqueness from other websites existed.
- 2. Color theme and overall art design of the website.
- 3. Website wireframes overall design.
- 4. Documents(.md) writing and markdown design.
- 5. Coding(HTML&CSS): Navigation bar and search bar in each page.
- 6. Coding(HTML&CSS): Website main(index) page and User Info page.
+ 2. Website wireframes overall design.
+ 3. Documents(.md) writing and markdown design.
+ 4. Coding(HTML&CSS): Navigation bar and search bar in each page.
+ 5. Coding(HTML&CSS): Website main(index) page and User Info page.
+ 6. Coding(JavaScript): Affects in main(index) page.
 
 Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
 
  1. Website wireframes overall design.
- 2. Coding(HTML&CSS): Search Result page and User Login page.
+ 2. Coding(HTML&CSS): Course Detail page and User Login page.
+ 3. Coding(JavaScript): Affects and automatic increased comments in Course Detail page.
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
 
  1. Website wireframes overall design.
- 2. Coding(HTML&CSS): Course Detail page and User Signup page.
+ 2. Coding(HTML&CSS): Search Results page and User Signup page.
+ 3. Coding(JavaScript): Affects and automatic increased searched results in Search Results page.
