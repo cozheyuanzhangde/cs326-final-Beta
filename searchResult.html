@@ -16,8 +16,11 @@
         <!-- <div class="p-3 mb-2 bg-warning text-dark"> -->
         <div class="container">
             <br>
-            <h1 style="font-weight: 600;">FindYourCourse</h1>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
+            <h1 style="font-weight: 600; font-weight: bold; color: beige">FindYourCourse</h1>
+            </nav>
             <br><br>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="height:80px">
             <div class="row">
                 <div class="col-sm">
                     <input class="form-control" id="university" placeholder="School Name(UMass)">
@@ -32,41 +35,49 @@
                     <button type="button" class="btn btn-primary">Search</button>
                 </div>
             </div>
+            </nav>
             <br>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Rank by Difficulty/Time consumption/Overall
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Easy level</a>
-                  <a class="dropdown-item" href="#">Time-saving level</a>
-                  <a class="dropdown-item" href="#">Overall</a>
+            <center>
+                <!-- <div class="btn-group nav justify-content-end" role="group" aria-label="Button group with nested dropdown"> -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Rank by Difficulty/Time consumption/Overall
+                    </button>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Easy level</a>
+                    <a class="dropdown-item" href="#">Time-saving level</a>
+                    <a class="dropdown-item" href="#">Overall</a>
+                    </div>
                 </div>
-            </div>
+                <!-- </div> -->
+            </center>
 
             <!-- searching details form -->
             <br>
-            <div class = "text-black">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+            <div class = "text-black" style= "color:rgba(0, 0, 0, 0.699)">
                 <br>
-                <div class="row">
-                    <div class="col-sm" >
+                <div class="card-header" style="width: 1080px;">
+                <div class="row" class = "card-body">
+                    <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Course Name</p>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Professor</p>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Difficulty</p>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Time consumption</p>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm" class = "card-title">
                         <p class="font-weight-bolder">Overall(default)</p>
                     </div>
                 </div>
+                </div>
                 <thead class="thead-light">
-                <div class="detail-container font-weight-bolder" id="searchDetail">
+                <div class="detail-container font-weight-bolder" id="searchDetail" style="width: 1100px;">
                 </thead>
                     <!-- <div class="row">
                         <div class="col-sm">
@@ -88,6 +99,7 @@
                 </div>
             </div>
         </div>
+    </nav>
         <!-- </div> -->
     </body>
 </html>
