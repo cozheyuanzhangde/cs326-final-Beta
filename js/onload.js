@@ -24,6 +24,10 @@ function createDiv(courseName, professor, easy, time, overall){
     let node1 = document.createElement('div');
     node1.classList.add('col-sm');
     node1.innerHTML = courseName;
+    let a = document.createElement('a');
+    a.setAttribute('href',"./courseDetail.html");
+    a.appendChild(node1);
+    // node1.setAttribute('href',"./courseDetail.html");
     let node2 = document.createElement('div');
     node2.classList.add('col-sm');
     node2.innerHTML = professor;
@@ -36,7 +40,7 @@ function createDiv(courseName, professor, easy, time, overall){
     let node5 = document.createElement('div');
     node5.classList.add('col-sm');
     starRating(overall,node5);
-    bigDiv.appendChild(node1);
+    bigDiv.appendChild(a);
     bigDiv.appendChild(node2);
     bigDiv.appendChild(node3);
     bigDiv.appendChild(node4);
