@@ -56,7 +56,7 @@ function createCourse(){
 
 function createComments(){
     const theDiv = document.getElementById('comments');
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < 20; i++){
         theDiv.appendChild(createDiv('Jenny',"This is a great course, recommend to take it!", 3, 3, 4));
     }
 }
