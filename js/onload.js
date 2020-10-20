@@ -22,11 +22,12 @@ function createDiv(courseName, professor, easy, time, overall){
     let bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
     let node1 = document.createElement('div');
-    node1.classList.add('col-sm');
+    // node1.classList.add('col-sm');
     node1.innerHTML = courseName;
     let a = document.createElement('a');
     a.setAttribute('href',"./courseDetail.html");
     a.appendChild(node1);
+    a.classList.add('col-sm');
     // node1.setAttribute('href',"./courseDetail.html");
     let node2 = document.createElement('div');
     node2.classList.add('col-sm');
