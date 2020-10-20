@@ -35,9 +35,11 @@ Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
  1. Website wireframes overall design.
  2. Coding(HTML&CSS): Course Detail page and User Login page.
  3. Coding(JavaScript): Affects and automatic increased comments in Course Detail page.
+ 4. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
 
  1. Website wireframes overall design.
  2. Coding(HTML&CSS): Search Results page and User Signup page.
  3. Coding(JavaScript): Affects and automatic increased searched results in Search Results page.
+ 4. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
