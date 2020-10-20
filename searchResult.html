@@ -22,22 +22,42 @@
             <h1 style="font-weight: 600; font-weight: bold; color: beige">FindYourCourse</h1>
             </nav>
             <br><br>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="height:80px">
-            <div class="row">
-                <div class="col-sm">
-                    <input class="form-control" id="university" placeholder="School Name(UMass)">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                      <img src="./images/icon_FUC.png" width="30" height="30" alt="" loading="lazy">
+                      <a class = "unselectable" style = "font-family:courier; color: rgb(196, 169, 20); font-weight: bold; font-size: large;">FindUrCourse!</a>
+                    </a>
+                  </div>
+                  <ul class='nav navbar-nav mr-auto ml-auto'>
+                    <div class="custom-container container">
+                        <form>
+                          <div class="form-row">
+                            <div class="col-auto">
+                              <input type="text" class="form-control" placeholder="School Name(UMass)">
+                            </div>
+                            <div class="col-auto">
+                              <input type="text" class="form-control" placeholder="Course Subject(CS)">
+                            </div>
+                            <div class="col-auto">
+                              <input type="text" class="form-control" placeholder="Course Number(326)">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Search</button>
+                          </div>
+                        </form>
+                    </div>
+                  </ul>
+                  <ul class='nav navbar-nav navbar-right'>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"><span class="fas fa-user-plus"></span> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+                    </li>
+                  </ul>
                 </div>
-                <div class="col-sm">
-                    <input class="form-control" id="major" placeholder="Course Subject(CS)">
-                </div>
-                <div class="col-sm">
-                    <input class="form-control" id="number" placeholder="Course Number(326)">
-                </div>
-                <div class="col-sm">
-                    <button type="button" class="btn btn-primary">Search</button>
-                </div>
-            </div>
-            </nav>
+              </nav>
             <br>
             <center>
                 <!-- <div class="btn-group nav justify-content-end" role="group" aria-label="Button group with nested dropdown"> -->
