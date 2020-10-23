@@ -25,3 +25,14 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.logoText {
+    font-family:courier;
+    color: beige; 
+    font-weight: bold; 
+    font-size: large;
+}
+
+.indexPageMainTextWeight {
+    font-weight: 400;
+}
