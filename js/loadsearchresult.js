@@ -25,10 +25,10 @@ function createDiv(courseName, professor, easy, time, overall){
     // node1.classList.add('col-sm');
     node1.innerHTML = courseName;
     let a = document.createElement('a');
-    a.setAttribute('href',"./courseDetail.html");
+    a.setAttribute('href',"./coursedetail.html");
     a.appendChild(node1);
     a.classList.add('col-sm');
-    // node1.setAttribute('href',"./courseDetail.html");
+    // node1.setAttribute('href',"./coursedetail.html");
     let node2 = document.createElement('div');
     node2.classList.add('col-sm');
     node2.innerHTML = professor;
