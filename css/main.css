@@ -36,3 +36,10 @@
 .indexPageMainTextWeight {
     font-weight: 400;
 }
+.full{
+    color:orange;
+}
+
+.center{
+    text-align: center;
+}
