@@ -50,8 +50,7 @@ function createDiv(courseName, professor, easy, time, overall){
 
 function createCourse(){
     const theDiv = document.getElementById('courseInfo');
-        theDiv.appendChild(createDiv('cs 326','emery', 3, 3, 4));
-        theDiv.appendChild(node);
+    theDiv.appendChild(createDiv('cs 326','emery', 3, 3, 4));
 }
 
 function createComments(){
