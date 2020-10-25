@@ -53,3 +53,9 @@
     font-weight: bold;
     font-size: large;
 }
+.containerDetail {
+    width: 60rem;
+}
+.containerSearch {
+    max-width: 5rem;
+}
