@@ -1,8 +1,4 @@
-$(function(){
-    $("#searchbtn").on("click",function(){
-    urlJump();
-    });
-});
+document.getElementById("searchbtn").addEventListener("click", urlJump);
 
 function urlJump(){
     schoolName = document.getElementById("schoolName").value;
