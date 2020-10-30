@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1c15067c0b.js" crossorigin="anonymous"></script>
     <script src = "./js/searchbar.js" defer></script>
+    <script src = "./js/indexpagepopover.js" defer></script>
 
     <title>FindUrCourse!</title>
   </head>
@@ -65,11 +66,6 @@
         </form>
         <br>
         <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" title="Search Tip" data-content="Hi! User, if you want to search for a course, in order to get an accurate result, try to be specific about the School Name. For example, UMass has about 4 campuses, you can enter 'UMass Amherst' instead of 'UMass'. For Course Subject, you can just use the common shorthand for a certain course. By the way, you don't need to worry about the upper case or lower case! Have a great time finding your desired course!">Don't know how to search? Click this!</button>
-        <script>
-          $(document).ready(function(){
-              $('[data-toggle="popover"]').popover();   
-          });
-        </script>
       </div>
     </div>
   </body>
