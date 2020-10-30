@@ -74,3 +74,10 @@ function doIt(){
 }
 
 window.onload = doIt;
+
+let schoolName = getURLParam("schoolname");
+let courseSubject = getURLParam("coursesubject");
+let courseNumber = getURLParam("coursenumber");
+console.log(schoolName);
+console.log(courseSubject);
+console.log(courseNumber);
