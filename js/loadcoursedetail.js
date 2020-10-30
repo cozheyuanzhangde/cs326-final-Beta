@@ -59,3 +59,16 @@ function createComments(){
         theDiv.appendChild(createDiv('Jenny',"This is a great course, recommend to take it!", 3, 3, 4));
     }
 }
+
+function getURLParam(paramName) {
+    var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+
+let schoolName = getURLParam("schoolname");
+let courseSubject = getURLParam("coursesubject");
+let courseNumber = getURLParam("coursenumber");
+console.log(schoolName);
+console.log(courseSubject);
+console.log(courseNumber);
