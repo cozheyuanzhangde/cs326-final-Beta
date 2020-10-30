@@ -16,6 +16,19 @@ function starRating(n,element){
     element.appendChild(div);
 }
 
+function getURLParam(paramName) {
+    var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+
+function coursedetailURLJump(){
+    let schoolName = getURLParam("schoolname");
+    let courseSubject = getURLParam("coursesubject");
+    let courseNumber = getURLParam("coursenumber");
+    url = "coursedetail.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
+    window.location.href = url;
+}
 
 function createDiv(courseName, professor, easy, time, overall){
     // for(let i = 0; i < num; i++){
@@ -25,7 +38,7 @@ function createDiv(courseName, professor, easy, time, overall){
     // node1.classList.add('col-sm');
     node1.innerHTML = courseName;
     let a = document.createElement('a');
-    a.setAttribute('href',"./coursedetail.html");
+    a.addEventListener("click", coursedetailURLJump);
     a.appendChild(node1);
     a.classList.add('col-sm');
     // node1.setAttribute('href',"./coursedetail.html");
