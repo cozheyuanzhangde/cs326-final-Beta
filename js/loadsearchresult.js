@@ -39,6 +39,7 @@ function createDiv(courseName, professor, easy, time, overall){
     node1.innerHTML = courseName;
     let a = document.createElement('a');
     a.addEventListener("click", coursedetailURLJump);
+    a.setAttribute('style','cursor:pointer');
     a.appendChild(node1);
     a.classList.add('col-sm');
     // node1.setAttribute('href',"./coursedetail.html");
