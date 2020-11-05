@@ -1,8 +1,8 @@
 function starRating(n,element){
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     let count = 0;
     for(let i = 0; i < 5; i++){
-        let node = document.createElement('span');
+        const node = document.createElement('span');
         if(count < n){
             // node.classList.add('fa fa-star full');
             node.setAttribute('class','fa fa-star full');
@@ -17,42 +17,42 @@ function starRating(n,element){
 }
 
 function getURLParam(paramName) {
-    var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return null;
+    const reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+    const r = window.location.search.substr(1).match(reg);
+    if (r != null) {return unescape(r[2]);} return null;
 }
 
 function coursedetailURLJump(){
-    let schoolName = getURLParam("schoolname");
-    let courseSubject = getURLParam("coursesubject");
-    let courseNumber = getURLParam("coursenumber");
+    const schoolName = getURLParam("schoolname");
+    const courseSubject = getURLParam("coursesubject");
+    const courseNumber = getURLParam("coursenumber");
     url = "coursedetail.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
     window.location.href = url;
 }
 
 function createDiv(courseName, professor, easy, time, overall){
     // for(let i = 0; i < num; i++){
-    let bigDiv = document.createElement('div');
+    const bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
-    let node1 = document.createElement('div');
+    const node1 = document.createElement('div');
     // node1.classList.add('col-sm');
     node1.innerHTML = courseName;
-    let a = document.createElement('a');
+    const a = document.createElement('a');
     a.addEventListener("click", coursedetailURLJump);
     a.setAttribute('style','cursor:pointer');
     a.appendChild(node1);
     a.classList.add('col-sm');
     // node1.setAttribute('href',"./coursedetail.html");
-    let node2 = document.createElement('div');
+    const node2 = document.createElement('div');
     node2.classList.add('col-sm');
     node2.innerHTML = professor;
-    let node3 = document.createElement('div');
+    const node3 = document.createElement('div');
     node3.classList.add('col-sm');
     starRating(easy,node3);
-    let node4 = document.createElement('div');
+    const node4 = document.createElement('div');
     node4.classList.add('col-sm');
     starRating(time,node4);
-    let node5 = document.createElement('div');
+    const node5 = document.createElement('div');
     node5.classList.add('col-sm');
     starRating(overall,node5);
     bigDiv.appendChild(a);
@@ -68,16 +68,16 @@ function doIt(){
     const theDiv = document.getElementById('searchDetail');
     for(let i = 0; i < 6; i++){
         theDiv.appendChild(createDiv('cs 326','emery', 3, 3, 4));
-        let node = document.createElement('br');
+        const node = document.createElement('br');
         theDiv.appendChild(node);
     }
 }
 
 window.onload = doIt;
 
-let schoolName = getURLParam("schoolname");
-let courseSubject = getURLParam("coursesubject");
-let courseNumber = getURLParam("coursenumber");
+const schoolName = getURLParam("schoolname");
+const courseSubject = getURLParam("coursesubject");
+const courseNumber = getURLParam("coursenumber");
 console.log(schoolName);
 console.log(courseSubject);
 console.log(courseNumber);

@@ -32,7 +32,7 @@ document.getElementById('overall').addEventListener('change',()=>{
 let comment = '';
 document.getElementById('comments').addEventListener('change',()=>{
   comment = document.getElementById('comments').value;
-})
+});
 
 async function postCreateCourse(url = '',courseName,courseProfessor,subject, courseDifficulty, courseTimeConsumption, courseOverall, comment) {
     await fetch(url, {
