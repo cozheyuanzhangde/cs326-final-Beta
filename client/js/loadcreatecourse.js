@@ -29,6 +29,11 @@ document.getElementById('overall').addEventListener('change',()=>{
   courseoverall = document.getElementById('overall').value;
 });
 
+let comment = '';
+document.getElementById('comments').addEventListener('change',()=>{
+  comment = document.getElementById('comments').value;
+})
+
 async function postCreateCourse(url = '',courseName,courseProfessor,subject, courseDifficulty, courseTimeConsumption, courseOverall, comment) {
     await fetch(url, {
       method: 'POST',  
@@ -40,5 +45,5 @@ async function postCreateCourse(url = '',courseName,courseProfessor,subject, cou
 }
 
 document.getElementById('submit').addEventListener('click',()=>{
-    postCreateCourse('/createNewCourse', coursename, courseprofessor, subject, coursedifficulty, coursetimeconsumption, courseoverall);
+    postCreateCourse('/createNewCourse', coursename, courseprofessor, subject, coursedifficulty, coursetimeconsumption, courseoverall,comment);
 });
