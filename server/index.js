@@ -29,7 +29,6 @@ createServer(async (req, res) => {
                 gender: data.gender,
                 major: data.major
             });
-            // console.log(database);
             
             writeFile("database.json", JSON.stringify(database), err => {
                 if (err) {
