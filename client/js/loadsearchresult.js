@@ -19,14 +19,14 @@ function starRating(n,element){
 function getURLParam(paramName) {
     const reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
     const r = window.location.search.substr(1).match(reg);
-    if (r != null) {return unescape(r[2]);} return null;
+    if (r !== null) {return unescape(r[2]);} return null;
 }
 
 function coursedetailURLJump(){
     const schoolName = getURLParam("schoolname");
     const courseSubject = getURLParam("coursesubject");
     const courseNumber = getURLParam("coursenumber");
-    url = "coursedetail.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
+    const url = "coursedetail.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
     window.location.href = url;
 }
 
