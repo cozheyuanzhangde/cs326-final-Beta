@@ -64,7 +64,11 @@ createServer(async (req, res) => {
             });
         });
     }
-    else if (parsed.pathname === '/loadcourse')
+    else if (parsed.pathname === '/loadcourses') {
+        res.end(JSON.stringify(
+            database.courses
+        ));
+    }
     // else if (parsed.pathname === '/highestWordScores') {
     //     res.end(JSON.stringify(
     //         database.wordScores.sort((a, b) => b.score - a.score).filter((v, i) => i < 10)
