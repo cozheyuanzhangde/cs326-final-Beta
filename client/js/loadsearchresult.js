@@ -71,42 +71,7 @@ function createDiv(courseName, professor, difficulty, time, overall){
     bigDiv.appendChild(node4);
     bigDiv.appendChild(node5);
     return bigDiv;
-    // }
 }
-
-// function createDiv2(courseName, professor, difficulty, time, overall){
-//     // for(let i = 0; i < num; i++){
-//     const bigDiv = document.createElement('div');
-//     bigDiv.classList.add('row');
-//     const node1 = document.createElement('div');
-//     node1.classList.add('col-sm');
-//     node1.setAttribute('id','cd-courseName');
-//     node1.innerHTML = courseName;
-//     const node2 = document.createElement('div');
-//     node2.classList.add('col-sm');
-//     node2.setAttribute('id','cd-professor');
-//     node2.innerHTML = professor;
-//     const node3 = document.createElement('div');
-//     node3.classList.add('col-sm');
-//     node3.setAttribute('id','cd-difficulty');
-//     starRating(difficulty,node3);
-//     const node4 = document.createElement('div');
-//     node4.classList.add('col-sm');
-//     node4.setAttribute('id','cd-timeConsumption');
-//     starRating(time,node4);
-//     const node5 = document.createElement('div');
-//     node5.classList.add('col-sm');
-//     node5.setAttribute('id','cd-overall');
-//     starRating(overall,node5);
-//     bigDiv.appendChild(node1);
-//     bigDiv.appendChild(node2);
-//     bigDiv.appendChild(node3);
-//     bigDiv.appendChild(node4);
-//     bigDiv.appendChild(node5);
-//     return bigDiv;
-
-// }
-
 
 window.addEventListener("load", async function () {
     const res_courses = await fetch("/loadcourses",{
