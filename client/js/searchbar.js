@@ -1,9 +1,9 @@
 document.getElementById("searchbtn").addEventListener("click", urlJump);
 
 function urlJump(){
-    schoolName = document.getElementById("schoolName").value;
-    courseSubject = document.getElementById("courseSubject").value;
-    courseNumber = document.getElementById("courseNumber").value;
-    url = "searchresult.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
+    const schoolName = document.getElementById("schoolName").value;
+    const courseSubject = document.getElementById("courseSubject").value;
+    const courseNumber = document.getElementById("courseNumber").value;
+    const url = "searchresult.html?schoolname="+schoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber;
     window.location.href = url;
 }
