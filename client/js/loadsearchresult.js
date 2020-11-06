@@ -1,3 +1,10 @@
+const schoolName = getURLParam("schoolname");
+const courseSubject = getURLParam("coursesubject");
+const courseNumber = getURLParam("coursenumber");
+console.log(schoolName);
+console.log(courseSubject);
+console.log(courseNumber);
+
 function starRating(n,element){
     const div = document.createElement('div');
     let count = 0;
@@ -81,16 +88,11 @@ window.addEventListener("load", async function () {
     const theDiv = document.getElementById('searchDetail');
     
     courses.forEach(function (obj) {
-        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
-        theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
-        const node = document.createElement('br');
-        theDiv.appendChild(node);
+        if((obj.courseschoolname.toLowerCase() === schoolName.toLowerCase())&&(obj.coursesubject.toLowerCase() === courseSubject.toLowerCase())&&(obj.coursenumber.toLowerCase() === courseNumber.toLowerCase())){
+            const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
+            theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
+            const node = document.createElement('br');
+            theDiv.appendChild(node);
+        }  
     });
 });
-
-const schoolName = getURLParam("schoolname");
-const courseSubject = getURLParam("coursesubject");
-const courseNumber = getURLParam("coursenumber");
-console.log(schoolName);
-console.log(courseSubject);
-console.log(courseNumber);
