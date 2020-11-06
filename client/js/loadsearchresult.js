@@ -81,7 +81,7 @@ window.addEventListener("load", async function () {
     const theDiv = document.getElementById('searchDetail');
     
     courses.forEach(function (obj) {
-        let coursename = obj.coursesubject + " " + obj.coursenumber + "(" + obj.courseschoolname + ")";
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
         theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
         const node = document.createElement('br');
         theDiv.appendChild(node);
