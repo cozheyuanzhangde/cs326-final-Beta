@@ -1,11 +1,3 @@
-const schoolName = getURLParam("schoolname");
-const courseSubject = getURLParam("coursesubject");
-const courseNumber = getURLParam("coursenumber");
-console.log(schoolName);
-console.log(courseSubject);
-console.log(courseNumber);
-console.log(courseSubject + ' ' + courseNumber);
-
 function starRating(n,element){
     const div = document.createElement('div');
     let count = 0;
@@ -29,6 +21,14 @@ function getURLParam(paramName) {
     const r = window.location.search.substr(1).match(reg);
     if (r !== null) {return unescape(r[2]);} return null;
 }
+
+const schoolName = getURLParam("schoolname");
+const courseSubject = getURLParam("coursesubject");
+const courseNumber = getURLParam("coursenumber");
+console.log(schoolName);
+console.log(courseSubject);
+console.log(courseNumber);
+console.log(courseSubject + ' ' + courseNumber);
 
 function coursedetailURLJump(){
     // const theDiv = document.getElementById('courseInfo');
