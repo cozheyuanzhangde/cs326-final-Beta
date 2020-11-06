@@ -15,7 +15,7 @@ async function postAddNewUser(url = '', useremail, userpassword) {
       headers: {
         'Content-Type': "text/json"
       }, 
-      body: JSON.stringify({ "useremail": useremail, "userpassword": userpassword })
+      body: JSON.stringify({ "useremail": useremail, "userpassword": userpassword, "userschoolname": "", "usergender": "", "usermajor": ""})
     });
 }
 
