@@ -9,7 +9,8 @@ if (existsSync("server/database.json")) {
 } else {
     database = {
         users: [],
-        courses: []
+        courses: [],
+        coursedetail: []
     };
 }
 createServer(async (req, res) => {
@@ -64,9 +65,40 @@ createServer(async (req, res) => {
             });
         });
     }
+    else if (parsed.pathname === '/coursedetail') {
+        let body = '';
+        req.on('data', data => body += data);
+        req.on('end', () => {
+            const data = JSON.parse(body);
+            database.coursedetail.push({
+                courseschoolname: data.courseschoolname,
+                coursesubject: data.coursesubject,
+                coursenumber: data.coursenumber,
+                courseprofessor: data.courseprofessor,
+                studentname: data.studentname,
+                comment: data.comment,
+                coursedifficulty: data.coursedifficulty,
+                coursetimeconsumption: data.coursetimeconsumption,
+                courseoverall: data.courseoverall
+            });
+            
+            writeFile("database.json", JSON.stringify(database), err => {
+                if (err) {
+                    console.err(err);
+                }else{
+                    res.end();
+                }
+            });
+        });
+    } 
     else if (parsed.pathname === '/loadcourses') {
         res.end(JSON.stringify(
             database.courses
+        ));
+    }
+    else if (parsed.pathname === '/loadcoursesdetail') {
+        res.end(JSON.stringify(
+            database.coursedetail
         ));
     }
     // else if (parsed.pathname === '/highestWordScores') {
