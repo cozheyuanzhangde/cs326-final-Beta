@@ -1,3 +1,10 @@
+const schoolName = getURLParam("schoolname");
+const courseSubject = getURLParam("coursesubject");
+const courseNumber = getURLParam("coursenumber");
+console.log(schoolName);
+console.log(courseSubject);
+console.log(courseNumber);
+
 window.addEventListener('load',createCourse);
 window.addEventListener('load',createComments);
 
@@ -19,7 +26,7 @@ function starRating(n,element){
     element.appendChild(div);
 }
 
-function createDiv(courseName, professor, easy, time, overall){
+function createDiv(courseName, professor, difficulty, time, overall){
     // for(let i = 0; i < num; i++){
     const bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
@@ -31,7 +38,7 @@ function createDiv(courseName, professor, easy, time, overall){
     node2.innerHTML = professor;
     const node3 = document.createElement('div');
     node3.classList.add('col-sm');
-    starRating(easy,node3);
+    starRating(difficulty,node3);
     const node4 = document.createElement('div');
     node4.classList.add('col-sm');
     starRating(time,node4);
@@ -66,9 +73,28 @@ function getURLParam(paramName) {
     if (r !== null) {return unescape(r[2]);} return null;
 }
 
-const schoolName = getURLParam("schoolname");
-const courseSubject = getURLParam("coursesubject");
-const courseNumber = getURLParam("coursenumber");
-console.log(schoolName);
-console.log(courseSubject);
-console.log(courseNumber);
+window.addEventListener("load", async function () {
+    const res_courses = await fetch("/loadcourses",{
+        method: "GET"
+    });
+    if (!res_courses.ok) {
+        console.log(res_courses.error);
+        return;
+    }
+    let courses = await res_courses.json();
+
+    if(courses === undefined){
+        courses = [];
+    }
+
+    const theDiv = document.getElementById('searchDetail');
+    
+    courses.forEach(function (obj) {
+        if((obj.courseschoolname.toLowerCase() === schoolName.toLowerCase())&&(obj.coursesubject.toLowerCase() === courseSubject.toLowerCase())&&(obj.coursenumber.toLowerCase() === courseNumber.toLowerCase())){
+            const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
+            theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
+            const node = document.createElement('br');
+            theDiv.appendChild(node);
+        }  
+    });
+});
