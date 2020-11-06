@@ -4,35 +4,33 @@ import {join} from 'path';
 import {writeFile, readFileSync, existsSync} from 'fs';
 
 let database;
-if (existsSync("database.json")) {
-    database = JSON.parse(readFileSync("database.json"));
+if (existsSync("server/database.json")) {
+    database = JSON.parse(readFileSync("server/database.json"));
 } else {
     database = {
-        user: [],
-        searchResult: [],
-        courseDetail: [],
-        createNewCourse: []
+        users: [],
+        courses: []
     };
 }
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
 
-    if (parsed.pathname === '/user') {
+    if (parsed.pathname === '/addnewuser') {
         let body = '';
         req.on('data', data => body += data);
         req.on('end', () => {
             const data = JSON.parse(body);
-            database.user.push({
-                userEmail: data.userEmail,
-                userPassword: data.userPassword,
-                userName: data.userName,
-                schoolName: data.schoolName,
-                gender: data.gender,
-                major: data.major
+            database.users.push({
+                useremail: data.useremail,
+                userpassword: data.userpassword,
+                username: data.username,
+                userschoolname: data.userschoolname,
+                usergender: data.usergender,
+                usermajor: data.usergender
             });
             // console.log(database);
             
-            writeFile("database.json", JSON.stringify(database), err => {
+            writeFile("server/database.json", JSON.stringify(database), err => {
                 if (err) {
                     console.err(err);
                 }else{
@@ -40,22 +38,24 @@ createServer(async (req, res) => {
                 }
             });
         });
-    } else if (parsed.pathname === '/searchResult') {
+    }
+    else if (parsed.pathname === '/addnewcourse') {
         let body = '';
         req.on('data', data => body += data);
         req.on('end', () => {
             const data = JSON.parse(body);
-            database.searchResult.push({
-                courseSchool: data.courseSchool,
-                subject: data.subject,
-                courseNumber: data.courseNumber,
-                courseProfessor: data,courseProfessor,
-                courseDifficulty: data.courseDifficulty,
-                courseTimeConsumption: data.courseTimeConsumption,
-                courseOverall: data.courseOverall
+            database.courses.push({
+                courseschoolname: data.courseschoolname,
+                coursesubject: data.coursesubject,
+                coursenumber: data.coursenumber,
+                courseprofessor: data.courseprofessor,
+                coursedifficulty: data.coursedifficulty,
+                coursetime: data.coursetime,
+                courseoverall: data.courseoverall,
+                coursecomment: data.coursecomment
             });
             
-            writeFile("database.json", JSON.stringify(database), err => {
+            writeFile("server/database.json", JSON.stringify(database), err => {
                 if (err) {
                     console.err(err);
                 }else{
@@ -63,52 +63,8 @@ createServer(async (req, res) => {
                 }
             });
         });
-    } else if (parsed.pathname === '/courseDetail') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.courseDetail.push({
-                studentName: data.studentName,
-                comment: data.comment,
-                courseDifficulty: data.courseDifficulty,
-                courseTimeConsumption: data.courseTimeConsumption,
-                courseOverall: data.courseOverall
-            });
-            
-            writeFile("database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    } 
-    else if (parsed.pathname === '/createNewCourse') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.createNewCourse.push({
-                courseName: data.courseName,
-                courseProfessor: data.courseProfessor,
-                subject: data.subject,
-                courseDifficulty: data.courseDifficulty,
-                courseTimeConsumption: data.courseTimeConsumption,
-                courseOverall: data.courseOverall,
-                comment: data.comment
-            });
-            
-            writeFile("database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    } 
+    }
+    else if (parsed.pathname === '/loadcourse')
     // else if (parsed.pathname === '/highestWordScores') {
     //     res.end(JSON.stringify(
     //         database.wordScores.sort((a, b) => b.score - a.score).filter((v, i) => i < 10)
