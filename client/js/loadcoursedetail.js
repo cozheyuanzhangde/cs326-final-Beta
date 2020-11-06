@@ -63,7 +63,7 @@ function createComments(){
 function getURLParam(paramName) {
     const reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
     const r = window.location.search.substr(1).match(reg);
-    if (r != null) {return unescape(r[2]);} return null;
+    if (r !== null) {return unescape(r[2]);} return null;
 }
 
 const schoolName = getURLParam("schoolname");
