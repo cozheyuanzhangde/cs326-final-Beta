@@ -114,44 +114,35 @@
       <div class="card bg-light mb-3 containerDetail">
         <div id="commentHere" class="card-body">
           <p class = "font-weight-bold">Write your comment here</p>
-          <textarea class="card-text form-control" id="newcomment" rows=3></textarea>
+          <textarea class="card-text form-control" id="postnewcomment" rows=3></textarea>
         </div>
         <div class="btn-group nav justify-content-end" role="group" aria-label="Button group with nested dropdown">
           <div class="btn-group" role="group">
-            <button id="easyLevel" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Difficulty
-            </button>
-            <div class="dropdown-menu" aria-labelledby="difficulty">
-              <a class="dropdown-item" href="#">1 (easiest)</a>
-              <a class="dropdown-item" href="#">2</a>
-              <a class="dropdown-item" href="#">3</a>
-              <a class="dropdown-item" href="#">4</a>
-              <a class="dropdown-item" href="#">5 (hardest)</a>
-            </div>
+            <select class="form-control" aria-labelledby="difficulty" id="postdifficulty">
+              <option value="1">1 (easiest)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (hardest)</option>
+            </select>
           </div>
           <div class="btn-group" role="group">
-            <button id="timeLevel" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Time consumption
-            </button>
-            <div class="dropdown-menu" aria-labelledby="time">
-              <a class="dropdown-item" href="#">1 (less than 1 hour per week)</a>
-              <a class="dropdown-item" href="#">2 (1-2 hours per week)</a>
-              <a class="dropdown-item" href="#">3 (2-5 hours per week)</a>
-              <a class="dropdown-item" href="#">4 (5-8 hours per week)</a>
-              <a class="dropdown-item" href="#">5 (more than 8 hours per week)</a>
-            </div>
+            <select class="form-control" aria-labelledby="time" id="posttime">
+              <option value="1">1 (less than 1 hour per week)</option>
+              <option value="2">2 (1-2 hours per week)</option>
+              <option value="3">3 (2-5 hours per week)</option>
+              <option value="4">4 (5-8 hours per week)</option>
+              <option value="5">5 (more than 8 hours per week)</option>
+            </select>
           </div>
           <div class="btn-group" role="group">
-            <button id="overall" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Overall
-            </button>
-            <div class="dropdown-menu" aria-labelledby="overall">
-              <a class="dropdown-item" href="#">1 (worst)</a>
-              <a class="dropdown-item" href="#">2</a>
-              <a class="dropdown-item" href="#">3</a>
-              <a class="dropdown-item" href="#">4</a>
-              <a class="dropdown-item" href="#">5 (excellent)</a>
-            </div>
+            <select class="form-control" aria-labelledby="overall" id="postoverall">
+              <option value="1">1 (awful)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 (excellent)</option>
+            </select>
           </div>
           <button type="submit" class="btn btn-warning containerSearch" id='cd-submit'>Submit</button>
         </div>

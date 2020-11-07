@@ -1,48 +1,18 @@
-const schoolName = getURLParam("schoolname");
-const courseSubject = getURLParam("coursesubject");
-const courseNumber = getURLParam("coursenumber");
-console.log(schoolName);
-console.log(courseSubject);
-console.log(courseNumber);
-
-
-let comment = '';
-document.getElementById('newcomment').addEventListener('change',()=>{
-    comment = document.getElementById('newcomment').value;
-});
-
-let coursedifficulty = '';
-document.getElementById('easyLevel').addEventListener('change',()=>{
-    coursedifficulty = document.getElementById('easyLevel').value;
-});
-
-let coursetimeconsumption = '';
-document.getElementById('timeLevel').addEventListener('change',()=>{
-    coursetimeconsumption = document.getElementById('timeLevel').value;
-});
-
-let courseoverall = '';
-document.getElementById('overall').addEventListener('change',()=>{
-    courseoverall = document.getElementById('overall').value;
-});
-
-async function postCourseDetail(url = '',courseschoolname,coursesubject,coursenumber,courseprofessor,studentname,comment,coursedifficulty,coursetimeconsumption,courseoverall) {
-    await fetch(url, {
-      method: 'POST',  
-      headers: {
-        'Content-Type': "text/json"
-      }, 
-      body: JSON.stringify({ 'courseschoolname' : courseschoolname, 'coursesubject':coursesubject,'coursenumber':coursenumber,'courseprofessor': courseprofessor,'studentname' : studentname, 'comment': comment, 'coursedifficulty': coursedifficulty, 'coursetimeconsumption': coursetimeconsumption, 'courseoverall': courseoverall })
-    });
+function getURLParam(paramName) {
+    const reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
+    const r = window.location.search.substr(1).match(reg);
+    if (r !== null) {return unescape(r[2]);} return null;
 }
 
-// window.addEventListener('load',createCourse);
-// window.addEventListener('load',createComments);
-// window.addEventListener('load',()=>{
-document.getElementById('cd-submit').addEventListener('click',()=>{
-    postCourseDetail('/coursedetail','umass','cs','326', 'emery', 'Jenny', comment,coursedifficulty,coursetimeconsumption,courseoverall);
-})
-// });
+const this_courseSchoolName = getURLParam("schoolname");
+const this_courseSubject = getURLParam("coursesubject");
+const this_courseNumber = getURLParam("coursenumber");
+const this_courseName = getURLParam("coursename");
+const this_courseProfessor = getURLParam("professor");
+const this_courseDifficulty = getURLParam("difficulty");
+const this_courseTime = getURLParam("time");
+const this_courseOverall = getURLParam("overall");
+
 
 function starRating(n,element){
     const div = document.createElement('div');
@@ -50,7 +20,6 @@ function starRating(n,element){
     for(let i = 0; i < 5; i++){
         const node = document.createElement('span');
         if(count < n){
-            // node.classList.add('fa fa-star full');
             node.setAttribute('class','fa fa-star full');
             count ++;
         }
@@ -63,7 +32,6 @@ function starRating(n,element){
 }
 
 function createDiv(courseName, professor, difficulty, time, overall){
-    // for(let i = 0; i < num; i++){
     const bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
     const node1 = document.createElement('div');
@@ -98,74 +66,67 @@ function createDiv(courseName, professor, difficulty, time, overall){
 
 function createCourse(){
     const theDiv = document.getElementById('courseInfo');
-    theDiv.appendChild(createDiv('cs 326','emery', 3, 3, 4));
+    theDiv.appendChild(createDiv(this_courseName, this_courseProfessor, this_courseDifficulty, this_courseTime, this_courseOverall));
 }
 
 
 window.addEventListener("load", async function () {
-    const res_courses = await fetch("/loadcoursesdetail",{
+    const res_comments = await fetch("/loadcoursesdetail",{
         method: "GET"
     });
-    if (!res_courses.ok) {
-        console.log(res_courses.error);
+    if (!res_comments.ok) {
+        console.log(res_comments.error);
         return;
     }
-    let courses = await res_courses.json();
+    let comments = await res_comments.json();
 
-    if(courses === undefined){
-        courses = [];
+    if(comments === undefined){
+        comments = [];
     }
-
+    console.log(comments);
     const theDiv = document.getElementById('comments');
     
-    courses.forEach(function (obj) {
-        if((obj.courseschoolname.toLowerCase() === schoolName.toLowerCase())&&(obj.coursesubject.toLowerCase() === courseSubject.toLowerCase())&&(obj.coursenumber.toLowerCase() === courseNumber.toLowerCase())){
-            const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
-            theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
-            const node = document.createElement('br');
-            theDiv.appendChild(node);
-        }  
+    comments.forEach(function (obj) {
+        if((obj.detailschoolname.toLowerCase()===this_courseSchoolName.toLowerCase())&&(obj.detailsubject.toLowerCase()===this_courseSubject.toLowerCase())&&(obj.detailnumber.toLowerCase()===this_courseNumber.toLowerCase())&&(obj.detailprofessor.toLowerCase()===this_courseProfessor.toLowerCase())){
+            theDiv.appendChild(createDiv(obj.detailusername,obj.detailcomment, obj.detaildifficulty, obj.detailtime, obj.detailoverall));
+        }
     });
 });
 
+window.addEventListener('load',createCourse);
 
-// function createComments(){
-//     const theDiv = document.getElementById('comments');
-//     for(let i = 0; i < 5; i++){
-//         theDiv.appendChild(createDiv('Jenny',"This is a great course, recommend to take it!", 3, 3, 4));
-//     }
-// }
+let post_comment = '';
+document.getElementById('postnewcomment').addEventListener('change',()=>{
+    post_comment = document.getElementById('postnewcomment').value;
+});
 
-function getURLParam(paramName) {
-    const reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
-    const r = window.location.search.substr(1).match(reg);
-    if (r !== null) {return unescape(r[2]);} return null;
+let post_coursedifficulty = '';
+document.getElementById('postdifficulty').addEventListener('change',()=>{
+    post_coursedifficulty = document.getElementById('postdifficulty').value;
+});
+
+let post_coursetime = '';
+document.getElementById('posttime').addEventListener('change',()=>{
+    post_coursetime = document.getElementById('posttime').value;
+});
+
+let post_courseoverall = '';
+document.getElementById('postoverall').addEventListener('change',()=>{
+    post_courseoverall = document.getElementById('postoverall').value;
+});
+
+async function postNewComment(url = '', courseschoolname, coursesubject, coursenumber, courseprofessor, coursedifficulty, coursetime, courseoverall, coursecomment) {
+    await fetch(url, {
+      method: 'POST',  
+      headers: {
+        'Content-Type': "text/json"
+      }, 
+      body: JSON.stringify({ "courseschoolname": courseschoolname, "coursesubject": coursesubject, "coursenumber": coursenumber, "courseprofessor": courseprofessor, "coursedifficulty": coursedifficulty, "coursetime": coursetime, "courseoverall": courseoverall, "coursecomment": coursecomment })
+    });
 }
 
-// window.addEventListener("load", async function () {
-//     const res_courses = await fetch('/coursedetail',{
-//         method: "GET"
-//     });
-//     if (!res_courses.ok) {
-//         console.log(res_courses.error);
-//         return;
-//     }
-//     let courses = await res_courses.json();
-
-    // if(courses === undefined){
-    //     courses = [];
-    // }
-
-    // const theDiv = document.getElementById('searchDetail');
-    
-    // courses.forEach(function (obj) {
-    //     if((obj.courseschoolname.toLowerCase() === schoolName.toLowerCase())&&(obj.coursesubject.toLowerCase() === courseSubject.toLowerCase())&&(obj.coursenumber.toLowerCase() === courseNumber.toLowerCase())){
-    //         const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
-    //         theDiv.appendChild(createDiv(coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
-    //         const node = document.createElement('br');
-    //         theDiv.appendChild(node);
-    //     }  
-    // });
-// });
-window.addEventListener('load',createCourse);
-// window.addEventListener('load',createComments);
+document.getElementById('cd-submit').addEventListener('click',()=>{
+    postNewComment('/addnewcomment', this_courseSchoolName, this_courseSubject, this_courseNumber, this_courseProfessor, post_coursedifficulty, post_coursetime, post_courseoverall, post_comment);
+    alert("You successfully add a new comment!");
+    location.reload();
+});
