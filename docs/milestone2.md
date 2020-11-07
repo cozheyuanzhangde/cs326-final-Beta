@@ -20,7 +20,7 @@ This API read all the comments of a specific course selected on the previous pag
 ### API addnewuser
 ![sign up](screen_captures/signup-m2.png)
 This API allow user to register/signup on this website. Basically It takes an user email and an user password. Those will be stored in database.
-### API change userinfo
+### API changeuserinfo
 This API will allow user to change userinfo but user email cannot be changed! Users can add username which default to Anonymous for privacy consideration. However, user can change username to what they want. After this, comments will appear he or she's username instead of Anonymous. Also, user can select gender, schoolname, major or change password. This API with front-end interaction will be fully developed after introducing PostgreSQL database into the project.
 ## 3. Link of heroku: 
 ## 4. Breakdown of the Division of Labor
