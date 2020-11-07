@@ -1,4 +1,4 @@
-# Milestone 1: Project Wireframes
+# Milestone 2: Front-end JavaScript
 
 ## 0. Project API Planning
 ### API Flow Chart
