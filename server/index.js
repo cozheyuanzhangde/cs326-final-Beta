@@ -76,6 +76,57 @@ createServer(async (req, res) => {
             });
         });
     }
+    else if (parsed.pathname === '/addnewcomment') {
+        let body = '';
+        req.on('data', data => body += data);
+        req.on('end', () => {
+            const data = JSON.parse(body);
+            database.coursesdetail.push({
+                detailschoolname: data.courseschoolname,
+                detailsubject: data.coursesubject,
+                detailnumber: data.coursenumber,
+                detailprofessor: data.courseprofessor,
+                detailusername: "Anonymous",
+                detailcomment: data.coursecomment,
+                detaildifficulty: data.coursedifficulty,
+                detailtime: data.coursetime,
+                detailoverall: data.courseoverall
+            });
+            
+            writeFile("server/database.json", JSON.stringify(database), err => {
+                if (err) {
+                    console.err(err);
+                }else{
+                    res.end();
+                }
+            });
+        });
+    }
+    else if (parsed.pathname === '/changeuserinfo') {
+        let body = '';
+        req.on('data', data => body += data);
+        req.on('end', () => {
+            const data = JSON.parse(body);
+            const this_useremail = data.useremail;
+            database.users.forEach(function (obj) {
+                if(obj.useremail === this_useremail){
+                    obj.userpassword = data.userpassword;
+                    obj.username = data.username;
+                    obj.userschoolname = data.userschoolname;
+                    obj.usergender = data.usergender;
+                    obj.usermajor = data.usergender;
+                }  
+            });
+            
+            writeFile("server/database.json", JSON.stringify(database), err => {
+                if (err) {
+                    console.err(err);
+                }else{
+                    res.end();
+                }
+            });
+        });
+    }
     else if (parsed.pathname === '/loadcourses') {
         res.end(JSON.stringify(
             database.courses
