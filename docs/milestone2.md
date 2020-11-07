@@ -27,23 +27,22 @@ This API will allow user to change userinfo but user email cannot be changed! Us
 
 Zheyuan(Brian) Zhang (Email: zheyuanzhang@umass.edu Github: cozheyuanzhangde) :
 
- 1. Coding(JavaScript): Back-end API endpoints Design Implementation and database structure design.
+ 1. Coding(JavaScript): Back-end API endpoints Design Implementation and database structure design. (Final: /addnewcourse, /addnewcomment, /addnewuser, /loadcourses, /loadcoursesdetail, /changeuserinfo)
  2. Coding(JavaScript): Parameters passing from one page to another using URL including parsing them using Regular Expression from URL in the destination page.
  3. Coding(HTML/CSS): User Interface Updates for better user-experience.
  4. Coding(JavaScript): Front-end Interaction with the back-end server side which implements add new user, add new course, load courses, load coursesdetail, add new comment...
- 5. Heroku Deployment/Github
+ 5. Heroku Deployment /Github
  6. Documents(.md) writing and markdown design.
 
 Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
-1. Website wireframes overall design.
-2. Coding(HTML&CSS): Course Detail page and User Login page.
-3. Coding(JavaScript): Affects in Course Detail page.
-4. Coding(JavaScript): Automatic increased comments in Course Detail page.
-5. Coding(HTML&CSS): Login/Signup/UserInfo template design for consistency.
+1. API Flow Chart Drawing.
+2. Coding(HTML/CSS): Created a new page called addnewcourse.html which provide an user interface for adding a new course.
+3. Coding(JavaScript): Front-end Interaction with back-end of adding a new course.
 
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
-1. Website wireframes overall design.
-2. Coding(HTML&CSS): Search Results page and User Signup page.
-3. Coding(JavaScript): Affects in Search Results page.
-4. Coding(JavaScript): Automatic increased comments in Search Results page.. 
+1. Heroku Deployment /Fixing bugs.
+2. Coding(JavaScript): Back-end API endpoints skeleton draft code for searchresults and addnewcourse.
+3. Reform the root files to client and server.
+4. Coding(HTML): Fixed Missing IDs.
+5. Coding(JavaScript): JS part for addnewcourse.
