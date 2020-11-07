@@ -13,6 +13,13 @@ if (existsSync("server/database.json")) {
         coursesdetail: []
     };
 }
+
+let port = process.env.PORT;
+
+if (port === null || port === "") {
+    port = 8080;
+}
+
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
 
@@ -162,4 +169,4 @@ createServer(async (req, res) => {
             res.end();
         }
     }
-}).listen(8080);
+}).listen(port);
