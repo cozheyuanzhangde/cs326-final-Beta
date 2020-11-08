@@ -14,11 +14,7 @@ if (existsSync("server/database.json")) {
     };
 }
 
-let port = process.env.PORT;
-
-if (port === null || port === "") {
-    port = 8080;
-}
+const port = process.env.PORT || 8080;
 
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
