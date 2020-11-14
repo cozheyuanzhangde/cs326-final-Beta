@@ -1,168 +1,108 @@
-import {createServer} from 'http';
-import {parse} from 'url';
-import {join} from 'path';
-import {writeFile, readFileSync, existsSync} from 'fs';
+const express = require("express");
+const pgp = require("pg-promise")({
+    connect(client) {
+        console.log('Connected to database:', client.connectionParameters.database);
+    },
 
-let database;
-if (existsSync("server/database.json")) {
-    database = JSON.parse(readFileSync("server/database.json"));
-} else {
-    database = {
-        users: [],
-        courses: [],
-        coursesdetail: []
-    };
+    disconnect(client) {
+        console.log('Disconnected from database:', client.connectionParameters.database);
+    }
+});
+
+// Local PostgreSQL credentials
+const pgusername = "postgres";
+const pgpassword = "p0st2333";
+
+const url = process.env.DATABASE_URL || `postgres://${pgusername}:${pgpassword}@localhost/`;
+const db = pgp(url);
+
+async function connectAndRun(task) {
+    let connection = null;
+    try {
+        connection = await db.connect();
+        return await task(connection);
+    } catch (e) {
+        console.log(e);
+        throw e;
+    } finally {
+        connection.done();
+    }
 }
 
-const port = process.env.PORT || 8080;
+async function addNewUser(email, password, username, schoolname, gender, major) {
+    return await connectAndRun(db => db.none("INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6);", [email, password, username, schoolname, gender, major]));
+}
 
-createServer(async (req, res) => {
-    const parsed = parse(req.url, true);
+//courseid returning for addNewComment
+async function addNewCourse(schoolname, coursesubject, coursenumber, instructor, difficulty, time, overall) {
+    return await connectAndRun(db => db.one("INSERT INTO gameScores VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING courseid;", [schoolname, coursesubject, coursenumber, instructor, difficulty, time, overall]));
+}
 
-    if (parsed.pathname === '/addnewuser') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.users.push({
-                useremail: data.useremail,
-                userpassword: data.userpassword,
-                username: data.username,
-                userschoolname: data.userschoolname,
-                usergender: data.usergender,
-                usermajor: data.usergender
-            });
-            
-            writeFile("server/database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    }
-    else if (parsed.pathname === '/addnewcourse') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.coursesdetail.push({
-                detailschoolname: data.courseschoolname,
-                detailsubject: data.coursesubject,
-                detailnumber: data.coursenumber,
-                detailprofessor: data.courseprofessor,
-                detailusername: "Anonymous",
-                detailcomment: data.coursecomment,
-                detaildifficulty: data.coursedifficulty,
-                detailtime: data.coursetime,
-                detailoverall: data.courseoverall
-            });
+//courseid returning for updateCourseInfo
+async function addNewComment(courseid, username, textcomment, difficulty, time, overall) {
+    return await connectAndRun(db => db.one("INSERT INTO gameScores VALUES ($1, $2, $3, $4, $5, $6) RETURNING courseid;", [courseid, username, textcomment, difficulty, time, overall]));
+}
 
-            database.courses.push({
-                courseschoolname: data.courseschoolname,
-                coursesubject: data.coursesubject,
-                coursenumber: data.coursenumber,
-                courseprofessor: data.courseprofessor,
-                coursedifficulty: data.coursedifficulty,
-                coursetime: data.coursetime,
-                courseoverall: data.courseoverall,
-                coursecommentsnumber: 1
-            });
-            
-            writeFile("server/database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    }
-    else if (parsed.pathname === '/addnewcomment') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.coursesdetail.push({
-                detailschoolname: data.courseschoolname,
-                detailsubject: data.coursesubject,
-                detailnumber: data.coursenumber,
-                detailprofessor: data.courseprofessor,
-                detailusername: "Anonymous",
-                detailcomment: data.coursecomment,
-                detaildifficulty: data.coursedifficulty,
-                detailtime: data.coursetime,
-                detailoverall: data.courseoverall
-            });
-            
-            writeFile("server/database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    }
-    else if (parsed.pathname === '/changeuserinfo') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            const this_useremail = data.useremail;
-            database.users.forEach(function (obj) {
-                if(obj.useremail === this_useremail){
-                    obj.userpassword = data.userpassword;
-                    obj.username = data.username;
-                    obj.userschoolname = data.userschoolname;
-                    obj.usergender = data.usergender;
-                    obj.usermajor = data.usergender;
-                }  
-            });
-            
-            writeFile("server/database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                }else{
-                    res.end();
-                }
-            });
-        });
-    }
-    else if (parsed.pathname === '/loadcourses') {
-        res.end(JSON.stringify(
-            database.courses
-        ));
-    }
-    else if (parsed.pathname === '/loadcoursesdetail') {
-        res.end(JSON.stringify(
-            database.coursesdetail
-        ));
-    }
-    else {
-        // If the client did not request an API endpoint, we assume we need to fetch a file.
-        // This is terrible security-wise, since we don't check the file requested is in the same directory.
-        // This will do for our purposes.
-        const filename = parsed.pathname === '/' ? "index.html" : parsed.pathname.replace('/', '');
-        const path = join("client/", filename);
-        console.log("trying to serve " + path + "...");
-        if (existsSync(path)) {
-            if (filename.endsWith("html")) {
-                res.writeHead(200, {"Content-Type" : "text/html"});
-            } else if (filename.endsWith("css")) {
-                res.writeHead(200, {"Content-Type" : "text/css"});
-            } else if (filename.endsWith("js")) {
-                res.writeHead(200, {"Content-Type" : "text/javascript"});
-            } else {
-                res.writeHead(200);
-            }
+async function updateUserInfo(email, password, username, schoolname, gender, major) {
+    return await connectAndRun(db => db.none("UPDATE users SET password = $2, username = $3, schoolname = $4, gender = $5, major = $6 WHERE email = $1;", [email, password, username, schoolname, gender, major]));
+}
 
-            res.write(readFileSync(path));
-            res.end();
-        } else {
-            res.writeHead(404);
-            res.end();
-        }
-    }
-}).listen(port);
+async function updateCourseInfo(courseid, difficulty, time, overall) {
+    return await connectAndRun(db => db.none("UPDATE users SET difficulty = $2, time = $3, overall = $4 WHERE courseid = $1;", [courseid, difficulty, time, overall]));
+}
+
+async function loadCoursesBySchoolSubjectNumber(schoolname, coursesubject, coursenumber) {
+    return await connectAndRun(db => db.any("SELECT * from courses WHERE schoolname = $1 AND coursesubject = $2 AND coursenumber = $3;", [schoolname, coursesubject, coursenumber]));
+}
+
+async function loadCoursecommentsByCourseID(courseid) {
+    return await connectAndRun(db => db.any("SELECT * from courses WHERE courseid = $1;", [courseid]));
+}
+
+
+
+// EXPRESS SETUP
+const app = express();
+
+app.use('/', express.static('./client'));
+
+app.use(express.json());
+
+app.post("/addnewuser", async (req, res) => {
+    await addNewUser(req.body.email, req.body.password, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
+    res.send("OK");
+});
+
+app.post("/addnewcourse", async (req, res) => {
+    await addNewCourse(req.body.schoolname, req.body.coursesubject, req.body.coursenumber, req.body.instructor, req.body.difficulty, req.body.time, req.body.overall);
+    res.send("OK");
+});
+
+app.post("/addnewcomment", async (req, res) => {
+    await addNewComment(req.body.courseid, req.body.username, req.body.textcomment, req.body.difficulty, req.body.time, req.body.overall);
+    res.send("OK");
+});
+
+app.post("/updateuserinfo", async (req, res) => {
+    await updateUserInfo(req.body.email, req.body.password, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
+    res.send("OK");
+});
+
+app.post("/updatecourseinfo", async (req, res) => {
+    await updateCourseInfo(req.body.courseid, req.body.difficulty, req.body.time, req.body.overall);
+    res.send("OK");
+});
+
+app.get("/loadcoursesbyschoolsubjectnumber", async (req, res) => {
+    const coursesloaded = await loadCoursesBySchoolSubjectNumber(req.query.schoolname, req.query.coursesubject, req.query.coursenumber);
+    res.send(JSON.stringify(coursesloaded));
+});
+
+
+app.get("/loadcoursecommentsbycourseid", async (req, res) => {
+    const commentsloaded = await loadCoursecommentsByCourseID(req.query.courseid);
+    res.send(JSON.stringify(commentsloaded));
+});
+
+
+app.listen(process.env.PORT || 8080);
