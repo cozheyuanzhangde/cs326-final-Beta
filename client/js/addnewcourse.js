@@ -60,6 +60,7 @@ async function postAddNewComment(url = '', courseid, username, coursecomment, co
 
 document.getElementById('submit').addEventListener('click',()=>{
     postAddNewCourse('/addnewcourse', courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, coursecomment);
+    
     postAddNewComment('/addnewcomment', courseid, username, coursecomment, coursedifficulty, coursetime, courseoverall);
     alert("Well Done! You successfully add a new course with a comment!");
     window.location.href = "./index.html";
