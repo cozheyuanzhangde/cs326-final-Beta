@@ -35,7 +35,10 @@ async function addNewUser(email, password, username, schoolname, gender, major) 
 
 //courseid returning for addNewComment
 async function addNewCourse(schoolname, coursesubject, coursenumber, instructor, difficulty, time, overall) {
-    return await connectAndRun(db => db.one("INSERT INTO gameScores VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING courseid;", [schoolname, coursesubject, coursenumber, instructor, difficulty, time, overall]));
+    return await connectAndRun(db => db.one("INSERT INTO gameScores VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING courseid;", [schoolname, coursesubject, coursenumber, instructor, difficulty, time, overall])
+    .then(data => {
+        // data = a new event id, rather than an object with it
+    }));
 }
 
 //courseid returning for updateCourseInfo
