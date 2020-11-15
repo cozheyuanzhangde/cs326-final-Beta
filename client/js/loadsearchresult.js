@@ -62,8 +62,11 @@ function createDiv(courseid, courseSubject, courseNumber, courseSchoolName, cour
     return bigDiv;
 }
 
+let res_courses;
+
+let courses;
+
 window.addEventListener("load", async function () {
-    let res_courses;
     console.log(schoolName, courseSubject, courseNumber);
     if(schoolName === ""){
         alert("Sorry, You need to at least enter a School Name for searching courses!");
@@ -88,7 +91,7 @@ window.addEventListener("load", async function () {
         console.log(res_courses.error);
         return;
     }
-    let courses = await res_courses.json();
+    courses = await res_courses.json();
 
     console.log(courses);
 
@@ -98,6 +101,97 @@ window.addEventListener("load", async function () {
 
     const theDiv = document.getElementById('searchDetail');
     
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+/*<a id="rankdifficultyLH" class="dropdown-item" href="#">Difficulty(Low to High)</a>
+<a id="rankdifficultyHL" class="dropdown-item" href="#">Difficulty(High to Low)</a>
+<a id="ranktimeLH" class="dropdown-item" href="#">Time Comsumption(Low to High)</a>
+<a id="ranktimeHL" class="dropdown-item" href="#">Time Comsumption(High to Low)</a>
+<a id="rankoverallHL" class="dropdown-item" href="#">Overall(High to Low)</a>
+<a id="rankoverallLH" class="dropdown-item" href="#">Overall(Low to High)</a>*/
+
+document.getElementById('rankdifficultyLH').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return a.difficulty - b.difficulty;
+      });
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+document.getElementById('rankdifficultyHL').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return b.difficulty - a.difficulty;
+      });
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+document.getElementById('ranktimeLH').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return a.time - b.time;
+      });
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+document.getElementById('ranktimeHL').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return b.time - a.time;
+      });
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+document.getElementById('rankoverallHL').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return b.overall - a.overall;
+      });
+    courses.forEach(function (obj) {
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
+    });
+});
+
+document.getElementById('rankoverallLH').addEventListener('click',()=>{
+    const theDiv = document.getElementById('searchDetail');
+    theDiv.textContent = '';
+    courses.sort(function (a, b) {
+        return a.overall - b.overall;
+      });
     courses.forEach(function (obj) {
         const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
         theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
