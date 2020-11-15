@@ -63,9 +63,27 @@ function createDiv(courseid, courseSubject, courseNumber, courseSchoolName, cour
 }
 
 window.addEventListener("load", async function () {
-    const res_courses = await fetch(`/loadCoursesBySchoolSubjectNumber?schoolname=${schoolName}&coursesubject=${courseSubject}&coursenumber=${courseNumber}`,{
-        method: "GET"
-    });
+    let res_courses;
+    console.log(schoolName, courseSubject, courseNumber);
+    if(schoolName === ""){
+        alert("Sorry, You need to at least enter a School Name for searching courses!");
+        window.history.back();
+    } else if((courseSubject === "")&&(courseNumber !== "")){
+        alert("Sorry, You need to enter a Course Subject before Course Number!");
+        window.history.back();
+    } else if((courseSubject === "")&&(courseNumber === "")){
+        res_courses = await fetch(`/loadcoursesbyschool?schoolname=${schoolName}`,{
+            method: "GET"
+        });
+    } else if((courseNumber === "")){
+        res_courses = await fetch(`/loadcoursesbyschoolsubject?schoolname=${schoolName}&coursesubject=${courseSubject}`,{
+            method: "GET"
+        });
+    } else{
+        res_courses = await fetch(`/loadcoursesbyschoolsubjectnumber?schoolname=${schoolName}&coursesubject=${courseSubject}&coursenumber=${courseNumber}`,{
+            method: "GET"
+        });
+    }
     if (!res_courses.ok) {
         console.log(res_courses.error);
         return;
