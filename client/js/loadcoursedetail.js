@@ -4,11 +4,12 @@ function getURLParam(paramName) {
     if (r !== null) {return unescape(r[2]);} return null;
 }
 
+const this_courseId = getURLParam("courseid");
 const this_courseSchoolName = getURLParam("schoolname");
 const this_courseSubject = getURLParam("coursesubject");
 const this_courseNumber = getURLParam("coursenumber");
 const this_courseName = getURLParam("coursename");
-const this_courseProfessor = getURLParam("professor");
+const this_courseInstructor = getURLParam("instructor");
 const this_courseDifficulty = getURLParam("difficulty");
 const this_courseTime = getURLParam("time");
 const this_courseOverall = getURLParam("overall");
@@ -31,7 +32,7 @@ function starRating(n,element){
     element.appendChild(div);
 }
 
-function createDiv(courseName, professor, difficulty, time, overall){
+function createDiv(courseName, instructor, difficulty, time, overall){
     const bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
     const node1 = document.createElement('div');
@@ -40,8 +41,8 @@ function createDiv(courseName, professor, difficulty, time, overall){
     node1.innerHTML = courseName;
     const node2 = document.createElement('div');
     node2.classList.add('col-sm');
-    node2.setAttribute('id','cd-professor');
-    node2.innerHTML = professor;
+    node2.setAttribute('id','cd-instructor');
+    node2.innerHTML = instructor;
     const node3 = document.createElement('div');
     node3.classList.add('col-sm');
     node3.setAttribute('id','cd-difficulty');
@@ -64,14 +65,33 @@ function createDiv(courseName, professor, difficulty, time, overall){
 }
 
 
-function createCourse(){
+
+//"Create course label, not create course itself!"
+async function createCourse(){
+    const res_course = await fetch(`/loadCoursesBySchoolSubjectNumber?courseid=${this_courseId}`,{
+        method: "GET"
+    });
+    if (!res_course.ok) {
+        console.log(res_course.error);
+        return;
+    }
+    let thiscourse = await res_course.json();
+
+    console.log(thiscourse);
+
+    if(thiscourse === undefined){
+        thiscourse = {};
+    }
+
     const theDiv = document.getElementById('courseInfo');
-    theDiv.appendChild(createDiv(this_courseName, this_courseProfessor, this_courseDifficulty, this_courseTime, this_courseOverall));
+    const coursename = thiscourse.coursesubject + " " + thiscourse.coursenumber + " (" + thiscourse.schoolname + ")";
+    theDiv.appendChild(createDiv(coursename, thiscourse.instructor, thiscourse.difficulty, thiscourse.time, thiscourse.overall));
 }
 
+window.addEventListener('load', async () =>createCourse());
 
 window.addEventListener("load", async function () {
-    const res_comments = await fetch("/loadcoursesdetail",{
+    const res_comments = await fetch(`/loadcoursecommentsbycourseid?courseid=${this_courseId}`,{
         method: "GET"
     });
     if (!res_comments.ok) {
@@ -79,21 +99,17 @@ window.addEventListener("load", async function () {
         return;
     }
     let comments = await res_comments.json();
+    console.log(comments);
 
     if(comments === undefined){
         comments = [];
     }
-    console.log(comments);
     const theDiv = document.getElementById('comments');
     
     comments.forEach(function (obj) {
-        if((obj.detailschoolname.toLowerCase()===this_courseSchoolName.toLowerCase())&&(obj.detailsubject.toLowerCase()===this_courseSubject.toLowerCase())&&(obj.detailnumber.toLowerCase()===this_courseNumber.toLowerCase())&&(obj.detailprofessor.toLowerCase()===this_courseProfessor.toLowerCase())){
-            theDiv.appendChild(createDiv(obj.detailusername,obj.detailcomment, obj.detaildifficulty, obj.detailtime, obj.detailoverall));
-        }
+        theDiv.appendChild(createDiv(obj.username,obj.textcomment, obj.difficulty, obj.time, obj.overall));
     });
 });
-
-window.addEventListener('load',createCourse);
 
 let post_comment = '';
 document.getElementById('postnewcomment').addEventListener('change',()=>{
@@ -104,29 +120,49 @@ let post_coursedifficulty = '';
 document.getElementById('postdifficulty').addEventListener('change',()=>{
     post_coursedifficulty = document.getElementById('postdifficulty').value;
 });
+if (post_coursedifficulty === ''){
+    post_coursedifficulty = '1';
+}
 
 let post_coursetime = '';
 document.getElementById('posttime').addEventListener('change',()=>{
     post_coursetime = document.getElementById('posttime').value;
 });
+if (post_coursetime === ''){
+    post_coursetime = '1';
+}
 
 let post_courseoverall = '';
 document.getElementById('postoverall').addEventListener('change',()=>{
     post_courseoverall = document.getElementById('postoverall').value;
 });
+if (post_courseoverall === ''){
+    post_courseoverall = '1';
+}
 
-async function postNewComment(url = '', courseschoolname, coursesubject, coursenumber, courseprofessor, coursedifficulty, coursetime, courseoverall, coursecomment) {
+async function postNewComment(url = '', courseid, username, textcomment, difficulty, time, overall) {
     await fetch(url, {
       method: 'POST',  
       headers: {
-        'Content-Type': "text/json"
+        'Content-Type': "application/json"
       }, 
-      body: JSON.stringify({ "courseschoolname": courseschoolname, "coursesubject": coursesubject, "coursenumber": coursenumber, "courseprofessor": courseprofessor, "coursedifficulty": coursedifficulty, "coursetime": coursetime, "courseoverall": courseoverall, "coursecomment": coursecomment })
+      body: JSON.stringify({ "courseid": courseid, "username": username, "textcomment": textcomment, "difficulty": difficulty, "time": time, "overall": overall})
     });
 }
 
-document.getElementById('cd-submit').addEventListener('click',()=>{
-    postNewComment('/addnewcomment', this_courseSchoolName, this_courseSubject, this_courseNumber, this_courseProfessor, post_coursedifficulty, post_coursetime, post_courseoverall, post_comment);
+async function updateCourseInfo(url = '', courseid){
+    await fetch(url, {
+        method: 'POST',  
+        headers: {
+          'Content-Type': "application/json"
+        }, 
+        body: JSON.stringify({ "courseid": courseid})
+    });
+}
+
+document.getElementById('cd-submit').addEventListener('click', () => {
+    postNewComment('/addnewcomment', this_courseId, 'Anonymous', post_comment, post_coursedifficulty, post_coursetime, post_courseoverall);
+    updateCourseInfo('/updatecourseinfo', this_courseId);
     alert("You successfully add a new comment!");
     location.reload();
 });
