@@ -5,14 +5,6 @@ function getURLParam(paramName) {
 }
 
 const this_courseId = getURLParam("courseid");
-const this_courseSchoolName = getURLParam("schoolname");
-const this_courseSubject = getURLParam("coursesubject");
-const this_courseNumber = getURLParam("coursenumber");
-const this_courseName = getURLParam("coursename");
-const this_courseInstructor = getURLParam("instructor");
-const this_courseDifficulty = getURLParam("difficulty");
-const this_courseTime = getURLParam("time");
-const this_courseOverall = getURLParam("overall");
 
 
 function starRating(n,element){
@@ -68,7 +60,7 @@ function createDiv(courseName, instructor, difficulty, time, overall){
 
 //"Create course label, not create course itself!"
 async function createCourse(){
-    const res_course = await fetch(`/loadCoursesBySchoolSubjectNumber?courseid=${this_courseId}`,{
+    const res_course = await fetch(`/loadthiscourse?courseid=${this_courseId}`,{
         method: "GET"
     });
     if (!res_course.ok) {
