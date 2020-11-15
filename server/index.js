@@ -45,8 +45,12 @@ async function addNewComment(courseid, username, textcomment, difficulty, time, 
     return await connectAndRun(db => db.none("INSERT INTO coursecomments VALUES ($1, $2, $3, $4, $5, $6);", [courseid, username, textcomment, difficulty, time, overall]));
 }
 
-async function updateUserInfo(email, password, username, schoolname, gender, major) {
-    return await connectAndRun(db => db.none("UPDATE users SET password = $2, username = $3, schoolname = $4, gender = $5, major = $6 WHERE email = $1;", [email, password, username, schoolname, gender, major]));
+async function updateUserInfoByUserID(userid, email, password, username, schoolname, gender, major) {
+    return await connectAndRun(db => db.none("UPDATE users SET email = $2, password = $3, username = $4, schoolname = $5, gender = $6, major = $7 WHERE userid = $1;", [userid, email, password, username, schoolname, gender, major]));
+}
+
+async function updateUserInfoNoPWDChangeByUserID(userid, email, username, schoolname, gender, major) {
+    return await connectAndRun(db => db.none("UPDATE users SET email = $2, username = $3, schoolname = $4, gender = $5, major = $6 WHERE userid = $1;", [userid, email, username, schoolname, gender, major]));
 }
 
 async function updateCourseInfoByCommentsAVG(courseid) {
@@ -90,7 +94,12 @@ app.post("/addnewcomment", async (req, res) => {
 });
 
 app.post("/updateuserinfo", async (req, res) => {
-    await updateUserInfo(req.body.email, req.body.password, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
+    await updateUserInfoByUserID(req.body.userid, req.body.email, req.body.password, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
+    res.send("OK");
+});
+
+app.post("/updateuserinfonopwdchange", async (req, res) => {
+    await updateUserInfoNoPWDChangeByUserID(req.body.userid, req.body.email, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
     res.send("OK");
 });
 
