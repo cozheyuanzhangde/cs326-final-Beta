@@ -16,7 +16,7 @@
     const theDiv = document.getElementById('comments');
     
     comments.forEach(function (obj) {
-        if((obj.detailschoolname.toLowerCase()===this_courseSchoolName.toLowerCase())&&(obj.detailsubject.toLowerCase()===this_courseSubject.toLowerCase())&&(obj.detailnumber.toLowerCase()===this_courseNumber.toLowerCase())&&(obj.detailprofessor.toLowerCase()===this_courseProfessor.toLowerCase())){
+        if((obj.detailschoolname.toLowerCase()===this_courseSchoolName.toLowerCase())&&(obj.detailsubject.toLowerCase()===this_courseSubject.toLowerCase())&&(obj.detailnumber.toLowerCase()===this_courseNumber.toLowerCase())&&(obj.detailinstructor.toLowerCase()===this_courseInstructor.toLowerCase())){
             theDiv.appendChild(createDiv(obj.detailusername,obj.detailcomment, obj.detaildifficulty, obj.detailtime, obj.detailoverall));
         }
     });
