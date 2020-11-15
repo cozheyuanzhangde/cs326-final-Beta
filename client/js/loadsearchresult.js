@@ -26,32 +26,33 @@ function starRating(n,element){
 }
 
 
-function coursedetailURLJump(para_courseSubject, para_courseNumber, para_courseSchoolName, para_courseName, para_professor, para_difficulty, para_time, para_overall){
+function coursedetailURLJump(para_courseid, para_courseSubject, para_courseNumber, para_courseSchoolName, para_courseName, para_instructor, para_difficulty, para_time, para_overall){
+    const courseid = para_courseid;
     const courseSubject = para_courseSubject;
     const courseNumber = para_courseNumber;
     const courseSchoolName = para_courseSchoolName;
     const courseName = para_courseName;
-    const professor = para_professor;
+    const instructor = para_instructor;
     const difficulty = para_difficulty;
     const time = para_time;
     const overall = para_overall;
-    const url = "coursedetail.html?schoolname="+courseSchoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber+"&coursename="+courseName+"&professor="+professor+"&difficulty="+difficulty+"&time="+time+"&overall="+overall;
+    const url = "coursedetail.html?courseid="+courseid+"&schoolname="+courseSchoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber+"&coursename="+courseName+"&instructor="+instructor+"&difficulty="+difficulty+"&time="+time+"&overall="+overall;
     window.location.href = url;
 }
 
-function createDiv(courseSubject, courseNumber, courseSchoolName, courseName, professor, difficulty, time, overall){
+function createDiv(courseid, courseSubject, courseNumber, courseSchoolName, courseName, instructor, difficulty, time, overall){
     const bigDiv = document.createElement('div');
     bigDiv.classList.add('row');
     const node1 = document.createElement('div');
     node1.innerHTML = courseName;
     const a = document.createElement('a');
-    a.addEventListener("click", () => coursedetailURLJump(courseSubject, courseNumber, courseSchoolName, courseName, professor, difficulty, time, overall));
+    a.addEventListener("click", () => coursedetailURLJump(courseid, courseSubject, courseNumber, courseSchoolName, courseName, instructor, difficulty, time, overall));
     a.setAttribute('style','cursor:pointer');
     a.appendChild(node1);
     a.classList.add('col-sm');
     const node2 = document.createElement('div');
     node2.classList.add('col-sm');
-    node2.innerHTML = professor;
+    node2.innerHTML = instructor;
     const node3 = document.createElement('div');
     node3.classList.add('col-sm');
     starRating(difficulty,node3);
@@ -70,7 +71,7 @@ function createDiv(courseSubject, courseNumber, courseSchoolName, courseName, pr
 }
 
 window.addEventListener("load", async function () {
-    const res_courses = await fetch("/loadcourses",{
+    const res_courses = await fetch(`/loadCoursesBySchoolSubjectNumber?schoolname=${schoolName}&coursesubject=${courseSubject}&coursenumber=${courseNumber}`,{
         method: "GET"
     });
     if (!res_courses.ok) {
@@ -79,6 +80,8 @@ window.addEventListener("load", async function () {
     }
     let courses = await res_courses.json();
 
+    console.log(courses);
+
     if(courses === undefined){
         courses = [];
     }
@@ -86,11 +89,9 @@ window.addEventListener("load", async function () {
     const theDiv = document.getElementById('searchDetail');
     
     courses.forEach(function (obj) {
-        if((obj.courseschoolname.toLowerCase() === schoolName.toLowerCase())&&(obj.coursesubject.toLowerCase() === courseSubject.toLowerCase())&&(obj.coursenumber.toLowerCase() === courseNumber.toLowerCase())){
-            const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.courseschoolname + ")";
-            theDiv.appendChild(createDiv(obj.coursesubject, obj.coursenumber, obj.courseschoolname, coursename, obj.courseprofessor, obj.coursedifficulty, obj.coursetime, obj.courseoverall));
-            const node = document.createElement('br');
-            theDiv.appendChild(node);
-        }  
+        const coursename = obj.coursesubject + " " + obj.coursenumber + " (" + obj.schoolname + ")";
+        theDiv.appendChild(createDiv(obj.courseid, obj.coursesubject, obj.coursenumber, obj.schoolname, coursename, obj.instructor, obj.difficulty, obj.time, obj.overall));
+        const node = document.createElement('br');
+        theDiv.appendChild(node);
     });
 });
