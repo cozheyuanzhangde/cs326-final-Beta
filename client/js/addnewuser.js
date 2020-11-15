@@ -13,9 +13,9 @@ async function postAddNewUser(url = '', useremail, userpassword) {
     await fetch(url, {
       method: 'POST',  
       headers: {
-        'Content-Type': "text/json"
+        'Content-Type': "application/json"
       }, 
-      body: JSON.stringify({ "useremail": useremail, "userpassword": userpassword, "userschoolname": "", "usergender": "", "usermajor": ""})
+      body: JSON.stringify({ "email": useremail, "password": userpassword, "username": "Anonymous",  "schoolname": "", "gender": "", "major": ""})
     });
 }
 
