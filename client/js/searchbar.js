@@ -1,3 +1,7 @@
+document.getElementById("schoolName").value = "";
+document.getElementById("courseSubject").value = "";
+document.getElementById("courseNumber").value = "";
+
 document.getElementById("searchbtn").addEventListener("click", urlJump);
 
 function urlJump(){
