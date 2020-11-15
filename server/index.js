@@ -50,7 +50,7 @@ async function updateUserInfo(email, password, username, schoolname, gender, maj
 }
 
 async function updateCourseInfoByCommentsAVG(courseid) {
-    return await connectAndRun(db => db.none("UPDATE courses SET difficulty = (SELECT ROUND(AVG(difficulty)) FROM coursecomments WHERE courseid = $1), time = (SELECT ROUND(AVG(time)) FROM coursecomments WHERE courseid = $1), overall = (SELECT ROUND(AVG(difficulty)) FROM coursecomments WHERE courseid = $1) WHERE courseid = $1;", [courseid]));
+    return await connectAndRun(db => db.none("UPDATE courses SET difficulty = (SELECT ROUND(AVG(difficulty)) FROM coursecomments WHERE courseid = $1), time = (SELECT ROUND(AVG(time)) FROM coursecomments WHERE courseid = $1), overall = (SELECT ROUND(AVG(overall)) FROM coursecomments WHERE courseid = $1) WHERE courseid = $1;", [courseid]));
 }
 
 async function loadCourseByCourseID(courseid) {
