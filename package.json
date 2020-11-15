@@ -1,6 +1,5 @@
 {
     "name": "findurcourse",
-    "type": "module",
     "scripts": {
         "start": "node server/index.js",
         "lint": "eslint client/ server/"
@@ -37,5 +36,10 @@
                 {}
             ]
         }
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "pg": "^8.4.2",
+        "pg-promise": "^10.7.3"
     }
 }
