@@ -26,17 +26,9 @@ function starRating(n,element){
 }
 
 
-function coursedetailURLJump(para_courseid, para_courseSubject, para_courseNumber, para_courseSchoolName, para_courseName, para_instructor, para_difficulty, para_time, para_overall){
+function coursedetailURLJump(para_courseid){
     const courseid = para_courseid;
-    const courseSubject = para_courseSubject;
-    const courseNumber = para_courseNumber;
-    const courseSchoolName = para_courseSchoolName;
-    const courseName = para_courseName;
-    const instructor = para_instructor;
-    const difficulty = para_difficulty;
-    const time = para_time;
-    const overall = para_overall;
-    const url = "coursedetail.html?courseid="+courseid+"&schoolname="+courseSchoolName+"&coursesubject="+courseSubject+"&coursenumber="+courseNumber+"&coursename="+courseName+"&instructor="+instructor+"&difficulty="+difficulty+"&time="+time+"&overall="+overall;
+    const url = "coursedetail.html?courseid="+courseid;
     window.location.href = url;
 }
 
@@ -46,7 +38,7 @@ function createDiv(courseid, courseSubject, courseNumber, courseSchoolName, cour
     const node1 = document.createElement('div');
     node1.innerHTML = courseName;
     const a = document.createElement('a');
-    a.addEventListener("click", () => coursedetailURLJump(courseid, courseSubject, courseNumber, courseSchoolName, courseName, instructor, difficulty, time, overall));
+    a.addEventListener("click", () => coursedetailURLJump(courseid));
     a.setAttribute('style','cursor:pointer');
     a.appendChild(node1);
     a.classList.add('col-sm');
