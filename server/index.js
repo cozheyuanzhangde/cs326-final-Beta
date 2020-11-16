@@ -143,5 +143,14 @@ app.get("/loadcoursecommentsbycourseid", async (req, res) => {
     res.send(JSON.stringify(commentsloaded));
 });
 
+app.get("/checkuserexistbyemail", async (req, res) => {
+    const user = await checkUserExistByEmail(req.query.email);    
+    res.send(JSON.stringify(user));
+});
+app.get("/loaduserinfobyuserid", async (req, res) => {
+    const user = await loadUserInfoByUserID(req.query.userid);    
+    res.send(JSON.stringify(user));
+});
+
 
 app.listen(process.env.PORT || 8080);
