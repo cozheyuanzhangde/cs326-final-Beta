@@ -20,7 +20,18 @@ async function postAddNewUser(url = '', useremail, userpassword) {
 }
 
 document.getElementById('submit').addEventListener('click',()=>{
-    postAddNewUser('/addnewuser', useremail, userpassword);
-    alert("Successful! You become a member of FindUrCourse Club!");
-    window.location.href = "./index.html";
+    if(useremail === ''){
+      alert("Sorry, you should enter email, please try again!");
+    }
+    else if(userpassword === ''){
+      alert("Sorry, you should enter password, please try again!");
+    }
+    else if(document.getElementById("confirm-userpassword").value === ''){
+      alert("Sorry, you should confirm password, please try again!");
+    }
+    else{
+      postAddNewUser('/addnewuser', useremail, userpassword);
+      alert("Successful! You become a member of FindUrCourse Club!");
+      window.location.href = "./index.html";
+    }
 });
