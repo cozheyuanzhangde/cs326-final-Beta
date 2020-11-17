@@ -19,6 +19,10 @@ async function postAddNewUser(url = '', useremail, userpassword) {
     });
 }
 
+function focusMethod(id) {           
+  document.getElementById(id).focus();
+}
+
 document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
       alert("Sorry, you should enter email, please try again!");
