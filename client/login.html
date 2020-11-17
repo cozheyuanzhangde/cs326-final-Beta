@@ -23,18 +23,18 @@
             </div>
             <br>
             <br>
-        
+            <form action="/login" method = "post">
             <div class="col">
                 <br>
                 <div class="row-sm-5">
-                    <input class="form-control rounded-pill text-center" id="useremail" placeholder="Email" onclick="focusMethod()">
+                    <input class="form-control rounded-pill text-center" id="useremail" placeholder="Email" name="username" onclick="focusMethod()">
                     <br>
                 </div>
                 <div class="row-sm">
                 </div>
                 <br>
                 <div class="row-sm-5">
-                    <input type="password" class="form-control rounded-pill text-center" id="userpassword" placeholder="Password" onclick="focusMethod()">
+                    <input type="password" class="form-control rounded-pill text-center" id="userpassword" placeholder="Password" name="password" onclick="focusMethod()">
                     <br>
                 </div>
                 <br>
@@ -50,6 +50,7 @@
                 <br>
                 <br>
             </div>
+            </form>
             <div id="message">
                 <h3>Password must contain the following:</h3>
                 <p id="letter" class="invalid">A <b>lowercase</b> letter</p>

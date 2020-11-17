@@ -1,4 +1,5 @@
 const express = require("express");
+// var path = require('path');
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -282,14 +283,23 @@ app.get('/',
 // Handle post data from the login.html form.
 app.post('/login', 
 	 passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/index',   // when we login, go to /private 
-	     'failureRedirect' : '/login'      // otherwise, back to login
+	     'successRedirect' : '/index.html',   // when we login, go to /private 
+	     'failureRedirect' : '/login.html'      // otherwise, back to login
 	 }));
+
+// app.get('/private',
+//      checkLoggedIn, // If we are logged in (notice the comma!)...
+//      (req, res) => {             // Go to the user's page.
+//          //  document.getElementById("indexsignup").innerHTML = "loggedin!!!";
+//          res.redirect('/index.html');
+//          // document.getElementById("abcd").innerHTML = "loggedin!!!";
+//      });
+
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
-	(req, res) => res.sendFile('/client/login.html',
-				   { 'root' : __dirname }));
+	(req, res) => res.sendFile('client/login.html',
+				   { 'root' : './'}));
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
@@ -321,8 +331,8 @@ app.post('/signup',
 
 // Register URL
 app.get('/signup',
-	(req, res) => res.sendFile('/client/signup.html',
-                   { 'root' : __dirname }));
+	(req, res) => res.sendFile('client/signup.html',
+                   { 'root' : './'}));
 app.use(express.static('client'));
 
 app.get('*', (req, res) => {
