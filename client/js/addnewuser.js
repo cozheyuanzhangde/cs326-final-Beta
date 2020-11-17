@@ -23,6 +23,9 @@ function focusMethod(id) {
   document.getElementById(id).focus();
 }
 
+let pswID = document.getElementById('userpassword');
+
+
 document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
       alert("Sorry, you should enter email, please try again!");
