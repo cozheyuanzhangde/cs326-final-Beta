@@ -9,20 +9,45 @@ document.getElementById('userpassword').addEventListener('change',()=>{
     userpassword = document.getElementById('userpassword').value;
 });
 
-function ValidateEmail(inputText){
+function validateEmail(inputText){
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if(inputText.value.match(mailformat)){
-        alert("Valid email address!");
-        document.form1.text1.focus();
         return true;
     }
     else{
-        alert("You have entered an invalid email address!");
-        document.form1.text1.focus();
         return false;
     }
 }
 
-document.getElementById('submit').addEventListener('click', ()=>{
+function validatePassword(inputText) { //6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter
+    var pwd=  /^[A-Za-z]\w{7,14}$/;
+    if(inputText.value.match(pwd)){ 
+        return true;
+    }
+    else{ 
+        return false;
+    }
+}
 
+function focusMethod(id) {           
+    document.getElementById(id).focus();
+}
+
+document.getElementById('submit').addEventListener('click', ()=>{
+    if(useremail === ''){
+        alert("Sorry, you should enter email, please try again!");
+    }
+    else if(userpassword === ''){
+        alert("Sorry, you should enter password, please try again!");
+    }
+    else if(!validateEmail(useremail)){
+        alert("You have entered an invalid email address! Please try again!");
+    }
+    else if(!validatePassword(userpassword)){
+        alert("You have entered an invalid password! Please try again!");
+    }
+    else if(validateEmail(useremail) && validatePassword(userpassword)){
+        alert("Login Success, jump back to main page.");
+        window.location.href = "./index.html";
+    }
 });
