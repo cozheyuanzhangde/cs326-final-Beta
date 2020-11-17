@@ -171,7 +171,7 @@ const expressSession = require('express-session');  // for managing session stat
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
 // const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8083;
 
 // Session configuration
 
@@ -275,6 +275,7 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
+        console.log("successfully logedin!!!");
 	    res.send("hello world");
 	});
 
@@ -287,7 +288,7 @@ app.post('/login',
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
-	(req, res) => res.sendFile('html/login.html',
+	(req, res) => res.sendFile('/client/login.html',
 				   { 'root' : __dirname }));
 
 // Handle logging out (takes us back to the login page).
@@ -316,18 +317,13 @@ app.post('/signup',
 	     // Check if we successfully added the user.
 	     // If so, redirect to '/login'
          // If not, redirect to '/register'.
-         if(addUser(username, password)){
-            res.redirect('/login');
-        } else {
-            res.redirect('/signup');
-        }
 	 });
 
 // Register URL
 app.get('/signup',
-	(req, res) => res.sendFile('html/signup.html',
+	(req, res) => res.sendFile('/client/signup.html',
                    { 'root' : __dirname }));
-app.use(express.static('html'));
+app.use(express.static('client'));
 
 app.get('*', (req, res) => {
     res.send('Error');

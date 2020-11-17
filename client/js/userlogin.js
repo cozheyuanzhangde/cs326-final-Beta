@@ -33,7 +33,7 @@ function focusMethod(id) {
     document.getElementById(id).focus();
 }
 
-document.getElementById('submit').addEventListener('click', ()=>{
+document.getElementById('loginid').addEventListener('click', ()=>{
     if(useremail === ''){
         alert("Sorry, you should enter email, please try again!");
     }
