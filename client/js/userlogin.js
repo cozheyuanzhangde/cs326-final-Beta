@@ -29,9 +29,14 @@ function validatePassword(inputText) { //6 to 20 characters which contain at lea
     }
 }
 
-function focusMethod(id) {           
-    document.getElementById(id).focus();
+function focusMethodE() {           
+    document.getElementById("useremail").focus();
 }
+
+function focusMethodP() {           
+    document.getElementById("userpassword").focus();
+}
+
 
 document.getElementById('loginid').addEventListener('click', ()=>{
     if(useremail === ''){

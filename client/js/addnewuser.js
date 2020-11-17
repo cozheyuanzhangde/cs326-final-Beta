@@ -19,8 +19,16 @@ async function postAddNewUser(url = '', useremail, userpassword) {
     });
 }
 
-function focusMethod(id) {           
-  document.getElementById(id).focus();
+function focusMethodE() {           
+  document.getElementById("useremail").focus();
+}
+
+function focusMethodP() {           
+  document.getElementById("userpassword").focus();
+}
+
+function focusMethodP2() {           
+  document.getElementById("confirm-userpassword").focus();
 }
 
 let pswID = document.getElementById('userpassword');
