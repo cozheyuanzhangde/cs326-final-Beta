@@ -80,6 +80,13 @@ async function loadCoursecommentsByCourseID(courseid) {
     return await connectAndRun(db => db.any("SELECT * from coursecomments WHERE courseid = $1;", [courseid]));
 }
 
+async function checkUserExistByEmail(email) {
+    return await connectAndRun(db => db.one("SELECT * FROM users WHERE email = $1;", [email]));
+}
+
+async function loadUserInfoByUserID(userid) {
+    return await connectAndRun(db => db.one("SELECT * FROM users WHERE userid = $1;", [userid]));
+}
 
 
 // EXPRESS SETUP
@@ -155,16 +162,6 @@ app.get("/loaduserinfobyuserid", async (req, res) => {
     res.send(JSON.stringify(user));
 });
 
-app.get("/checkuserexistbyemail", async (req, res) => {    
-    const user = await checkUserExistByEmail(req.query.email);    
-    res.send(JSON.stringify(user));
-});
-
-app.get("/loaduserinfobyuserid", async (req, res) => {    
-    const user = await loadUserInfoByUserID(req.query.userid);    
-    res.send(JSON.stringify(user));
-});
-
 //////////////////////////////////////////////////
 
 require('dotenv').config();
@@ -188,15 +185,15 @@ const session1 = {
 const strategy = new LocalStrategy(
     async (username, password, done) => {
 	if (!findUser(username)) {
-	    // no such user
-	    return done(null, false, { 'message' : 'Wrong username' });
-	}
-	if (!validatePassword(username, password)) {
-	    // invalid password
-	    // should disable logins after N messages
-	    // delay return to rate-limit brute-force attacks
-	    await new Promise((r) => setTimeout(r, 2000)); // two second delay
-	    return done(null, false, { 'message' : 'Wrong password' });
+        // no such user
+        return done(null, false, { 'message' : 'Wrong username' });
+        }
+        if (!validatePassword(username, password)) {
+        // invalid password
+        // should disable logins after N messages
+        // delay return to rate-limit brute-force attacks
+        await new Promise((r) => setTimeout(r, 2000)); // two second delay
+        return done(null, false, { 'message' : 'Wrong password' });
 	}
 	// success!
 	// should create a user object here, associated with a unique identifier
@@ -225,7 +222,7 @@ app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 /////
 
 // we use an in-memory "database"; this isn't persistent but is easy
-let users = { 'emery' : 'compsci326' } // default user
+let users = { 'emery' : 'compsci326' }; // default user
 let userMap = {};
 
 // Returns true iff the user exists.
@@ -278,15 +275,15 @@ app.get('/',
 	checkLoggedIn,
 	(req, res) => {
         console.log("successfully logedin!!!");
-	    res.send("hello world");
+        res.send("hello world");
 	});
 
 // Handle post data from the login.html form.
 app.post('/login', 
-	 passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/private',   // when we login, go to /private 
-	     'failureRedirect' : '/login.html'      // otherwise, back to login
-	 }));
+    passport.authenticate('local' , {     // use username/password authentication
+        'successRedirect' : '/private',   // when we login, go to /private 
+        'failureRedirect' : '/login.html'      // otherwise, back to login
+    }));
 
 app.get('/private',
      checkLoggedIn, // If we are logged in (notice the comma!)...
@@ -299,8 +296,8 @@ app.get('/private',
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
-	(req, res) => res.sendFile('client/login.html',
-				   { 'root' : './'}));
+    (req, res) => res.sendFile('client/login.html',
+    { 'root' : './'}));
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
@@ -316,20 +313,20 @@ app.get('/logout', (req, res) => {
 // Use res.redirect to change URLs.
 // TODO
 app.post('/signup',
-	 (req, res) => {
-         const username = req.body['username'];
-		 const password = req.body['password'];
-		 if(addUser(username,password) === true){
-			 res.redirect('/login');
-		 }
-		 else{
-			 res.redirect('/signup');
-		 }
-	     // TODO
-	     // Check if we successfully added the user.
-	     // If so, redirect to '/login'
-         // If not, redirect to '/register'.
-	 });
+    (req, res) => {
+        const username = req.body['username'];
+        const password = req.body['password'];
+        if(addUser(username,password) === true){
+            res.redirect('/login');
+        }
+        else{
+            res.redirect('/signup');
+        }
+        // TODO
+        // Check if we successfully added the user.
+        // If so, redirect to '/login'
+        // If not, redirect to '/register'.
+    });
 
 // Register URL
 app.get('/signup',
