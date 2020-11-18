@@ -1,4 +1,5 @@
 const express = require("express");
+const { Session } = require("express-session");
 // var path = require('path');
 const pgp = require("pg-promise")({
     connect(client) {
@@ -176,7 +177,7 @@ const port = process.env.PORT || 8083;
 
 // Session configuration
 
-const session = {
+const session1 = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
@@ -204,7 +205,7 @@ const strategy = new LocalStrategy(
 
 // App configuration
 
-app.use(expressSession(session));
+app.use(expressSession(session1));
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -283,17 +284,17 @@ app.get('/',
 // Handle post data from the login.html form.
 app.post('/login', 
 	 passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/index.html',   // when we login, go to /private 
+	     'successRedirect' : '/private',   // when we login, go to /private 
 	     'failureRedirect' : '/login.html'      // otherwise, back to login
 	 }));
 
-// app.get('/private',
-//      checkLoggedIn, // If we are logged in (notice the comma!)...
-//      (req, res) => {             // Go to the user's page.
-//          //  document.getElementById("indexsignup").innerHTML = "loggedin!!!";
-//          res.redirect('/index.html');
-//          // document.getElementById("abcd").innerHTML = "loggedin!!!";
-//      });
+app.get('/private',
+     checkLoggedIn, // If we are logged in (notice the comma!)...
+     (req, res) => {             // Go to the user's page.
+        //  const httpSession = req.getSession();
+        //  httpSession.setAttribute("login", "loggedin!!!");
+         res.redirect('/index.html');
+     });
 
 
 // Handle the URL /login (just output the login.html file).
