@@ -309,6 +309,7 @@ app.get('/logout', (req, res) => {
 });
 
 
+
 // Add a new user and password IFF one doesn't exist already.
 // If we successfully add a new user, go to /login, else, back to /register.
 // Use req.body to access data (as in, req.body['username']).
@@ -316,7 +317,7 @@ app.get('/logout', (req, res) => {
 // TODO
 app.post('/signup',
 	 (req, res) => {
-	     const username = req.body['username'];
+         const username = req.body['username'];
 		 const password = req.body['password'];
 		 if(addUser(username,password) === true){
 			 res.redirect('/login');
