@@ -1,5 +1,4 @@
 const express = require("express");
-const { Session } = require("express-session");
 // var path = require('path');
 const pgp = require("pg-promise")({
     connect(client) {
@@ -170,7 +169,7 @@ const expressSession = require('express-session');  // for managing session stat
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
 // const app = express();
-const port = process.env.PORT || 8083;
+const port = process.env.PORT || 8080;
 
 // Session configuration
 
@@ -222,8 +221,7 @@ app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 /////
 
 // we use an in-memory "database"; this isn't persistent but is easy
-let users = { 'emery' : 'compsci326' }; // default user
-let userMap = {};
+const users = { 'emery' : 'compsci326' }; // default user
 
 // Returns true iff the user exists.
 function findUser(username) {
