@@ -193,7 +193,8 @@ const port = process.env.PORT || 8080;
 const session = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 6*60*60*1000 }
 };
 
 // Passport configuration
