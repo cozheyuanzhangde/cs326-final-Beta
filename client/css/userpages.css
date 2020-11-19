@@ -39,3 +39,8 @@
     left: -35px;
     content: "✖";
   }
+
+  .wrong {
+    background-color:rgb(241, 151, 151);
+  }
+  

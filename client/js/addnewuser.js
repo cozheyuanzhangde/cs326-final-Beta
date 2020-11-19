@@ -31,12 +31,12 @@ function focusMethodP2() {
   document.getElementById("confirm-userpassword").focus();
 }
 
-//let pswID = document.getElementById('userpassword');
 let myInput = document.getElementById("userpassword");
-let confirm = document.getElementById("confirm-userpassword");
+let conf = document.getElementById("confirm-userpassword");
 let letter = document.getElementById("letter");
 let number = document.getElementById("number");
 let length = document.getElementById("length");
+let e = document.getElementById("useremail");
 
 // When the user clicks on the password field, show the message box
 myInput.onfocus = function() {
@@ -48,6 +48,10 @@ myInput.onblur = function() {
   document.getElementById("message").style.display = "none";
 }
 
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
 // When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate letters
@@ -79,10 +83,26 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 }
+e.onkeyup = function(){
+  let mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if(e.value.match(mailformat)){
+    e.classList.remove("wrong");
+  }else{
+    if(!e.classList.contains("wrong")){
+      e.classList.add("wrong");
+    }
+  }
+}
+conf.onkeyup = function() {
+  if(conf.value.match(myInput.value)){
+    conf.classList.remove("wrong");
+  }else{
+    if(!conf.classList.contains("wrong")){
+      conf.classList.add("wrong");
+    }
+  }
+}
 
-// confirm.onkeyup = function() {
-
-// }
 document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
       alert("Sorry, you should enter email, please try again!");
@@ -92,6 +112,9 @@ document.getElementById('submit').addEventListener('click',()=>{
     }
     else if(document.getElementById("confirm-userpassword").value === ''){
       alert("Sorry, you should confirm password, please try again!");
+    }
+    else if(document.getElementById("confirm-userpassword").value !== userpassword){
+      alert("Sorry, you confirm password is not match with password, please try again!");
     }
     else{
       postAddNewUser('/addnewuser', useremail, userpassword);
