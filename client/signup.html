@@ -41,6 +41,13 @@
                     <input type="password" class="form-control rounded-pill text-center" id="confirm-userpassword" placeholder="Confirm Password" onclick="focusMethodP2()">
                     <br>
                 </div>
+                
+                <div id="message">
+                    <h5>Password must contain the following:</h5>
+                    <p id="letter" class="invalid">A letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>6 characters</b></p>
+                </div>
                 <br>
                 <div class="text-center">
                     <button type="submit" class="btn btn-warning" id="submit" onclick="focusMethod()">Sign Up</button>

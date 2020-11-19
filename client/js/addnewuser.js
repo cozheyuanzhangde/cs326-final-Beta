@@ -31,9 +31,58 @@ function focusMethodP2() {
   document.getElementById("confirm-userpassword").focus();
 }
 
-let pswID = document.getElementById('userpassword');
+//let pswID = document.getElementById('userpassword');
+let myInput = document.getElementById("userpassword");
+let confirm = document.getElementById("confirm-userpassword");
+let letter = document.getElementById("letter");
+let number = document.getElementById("number");
+let length = document.getElementById("length");
 
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
 
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate letters
+  let letters = /[a-zA-Z]/g;
+  if(myInput.value.match(letters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+
+  // Validate numbers
+  let numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 6) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+
+// confirm.onkeyup = function() {
+
+// }
 document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
       alert("Sorry, you should enter email, please try again!");

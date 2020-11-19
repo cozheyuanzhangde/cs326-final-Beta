@@ -9,25 +9,25 @@ document.getElementById('userpassword').addEventListener('change',()=>{
     userpassword = document.getElementById('userpassword').value;
 });
 
-function validateEmail(inputText){
-    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(inputText.value.match(mailformat)){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
+// function validateEmail(inputText){
+//     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//     if(inputText.value.match(mailformat)){
+//         return true;
+//     }
+//     else{
+//         return false;
+//     }
+// }
 
-function validatePassword(inputText) { //6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter
-    var pwd=  /^[A-Za-z]\w{7,14}$/;
-    if(inputText.value.match(pwd)){ 
-        return true;
-    }
-    else{ 
-        return false;
-    }
-}
+// function validatePassword(inputText) { //6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter
+//     var pwd=  /^[A-Za-z]\w{7,14}$/;
+//     if(inputText.value.match(pwd)){ 
+//         return true;
+//     }
+//     else{ 
+//         return false;
+//     }
+// }
 
 function focusMethodE() {           
     document.getElementById("useremail").focus();
