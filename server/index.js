@@ -1,4 +1,5 @@
 const express = require("express");
+let secrets;
 // var path = require('path');
 const pgp = require("pg-promise")({
     connect(client) {
@@ -11,10 +12,19 @@ const pgp = require("pg-promise")({
 });
 
 // Local PostgreSQL credentials
-const pgusername = "postgres";
-const pgpassword = "p0st2333";
 
-const url = process.env.DATABASE_URL || `postgres://${pgusername}:${pgpassword}@localhost/`;
+let pgusername; 
+let pgpassword; 
+let url;
+
+if(!process.env.DATABASE_URL){
+    secrets = require('./secrets.json');
+    pgusername = secrets.postgreSQL_username;
+    pgpassword = secrets.postgreSQL_password;
+    url = `postgres://${pgusername}:${pgpassword}@localhost/`;
+} else{
+    url = process.env.DATABASE_URL;
+}
 const db = pgp(url);
 
 async function connectAndRun(task) {
@@ -85,6 +95,14 @@ async function checkUserExistByEmail(email) {
 
 async function loadUserInfoByUserID(userid) {
     return await connectAndRun(db => db.one("SELECT * FROM users WHERE userid = $1;", [userid]));
+}
+
+async function delateCourseByCourseID(courseid) {
+    return await connectAndRun(db => db.one("DELETE FROM courses WHERE courseid = $1;", [courseid]));
+}
+
+async function delateCoursecommentsByCourseID(courseid) {
+    return await connectAndRun(db => db.one("DELETE FROM coursecomments WHERE courseid = $1;", [courseid]));
 }
 
 
