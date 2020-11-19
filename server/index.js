@@ -179,19 +179,18 @@ app.get("/loaduserinfobyuserid", async (req, res) => {
     res.send(JSON.stringify(user));
 });
 
-//////////////////////////////////////////////////
+//Session/Cookie starts from here.
 
 require('dotenv').config();
 
 const expressSession = require('express-session');  // for managing session state
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
-// const app = express();
 const port = process.env.PORT || 8080;
 
 // Session configuration
 
-const session1 = {
+const session = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
@@ -219,7 +218,7 @@ const strategy = new LocalStrategy(
 
 // App configuration
 
-app.use(expressSession(session1));
+app.use(expressSession(session));
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
