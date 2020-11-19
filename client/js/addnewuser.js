@@ -31,31 +31,31 @@ function focusMethodP2() {
   document.getElementById("confirm-userpassword").focus();
 }
 
-let myInput = document.getElementById("userpassword");
-let conf = document.getElementById("confirm-userpassword");
-let letter = document.getElementById("letter");
-let number = document.getElementById("number");
-let length = document.getElementById("length");
-let e = document.getElementById("useremail");
+const myInput = document.getElementById("userpassword");
+const conf = document.getElementById("confirm-userpassword");
+const letter = document.getElementById("letter");
+const number = document.getElementById("number");
+const length = document.getElementById("length");
+const e = document.getElementById("useremail");
 
 // When the user clicks on the password field, show the message box
 myInput.onfocus = function() {
   document.getElementById("message").style.display = "block";
-}
+};
 
 // When the user clicks outside of the password field, hide the message box
 myInput.onblur = function() {
   document.getElementById("message").style.display = "none";
-}
+};
 
 // When the user clicks outside of the password field, hide the message box
 myInput.onblur = function() {
   document.getElementById("message").style.display = "none";
-}
+};
 // When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate letters
-  let letters = /[a-zA-Z]/g;
+  const letters = /[a-zA-Z]/g;
   if(myInput.value.match(letters)) {  
     letter.classList.remove("invalid");
     letter.classList.add("valid");
@@ -65,7 +65,7 @@ myInput.onkeyup = function() {
   }
 
   // Validate numbers
-  let numbers = /[0-9]/g;
+  const numbers = /[0-9]/g;
   if(myInput.value.match(numbers)) {  
     number.classList.remove("invalid");
     number.classList.add("valid");
@@ -82,9 +82,9 @@ myInput.onkeyup = function() {
     length.classList.remove("valid");
     length.classList.add("invalid");
   }
-}
+};
 e.onkeyup = function(){
-  let mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if(e.value.match(mailformat)){
     e.classList.remove("wrong");
   }else{
@@ -92,7 +92,7 @@ e.onkeyup = function(){
       e.classList.add("wrong");
     }
   }
-}
+};
 conf.onkeyup = function() {
   if(conf.value.match(myInput.value)){
     conf.classList.remove("wrong");
@@ -101,7 +101,7 @@ conf.onkeyup = function() {
       conf.classList.add("wrong");
     }
   }
-}
+};
 
 document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
