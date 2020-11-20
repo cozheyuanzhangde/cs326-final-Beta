@@ -188,8 +188,11 @@ const expressSession = require('express-session');  // for managing session stat
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
 const port = process.env.PORT || 8080;
+const minicrypt = require('./miniCrypt');
 
 // Session configuration
+
+const mc = new minicrypt();
 
 const session = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
@@ -258,7 +261,7 @@ async function validatePassword(email, pwd) {
     }
     const selectedUser = await checkUserExistByEmail(email);
     console.log(selectedUser[0]);
-    if (selectedUser[0].password !== pwd) {
+    if (!mc.check(pwd, selectedUser[0].password[0], selectedUser[0].password[1])) {
 	return false;
     }
     return true;
@@ -269,7 +272,8 @@ async function validatePassword(email, pwd) {
 // TODO
 async function addUser(email, pwd) {
 	if(await findUser(email) === false){
-        await addNewUser(email, pwd, "Anonymous", "", "", "");
+        const [salt, hash] = mc.hash(pwd);
+        await addNewUser(email, [salt, hash], "Anonymous", "", "", "");
         return true;
 	}else{
 		return false;
