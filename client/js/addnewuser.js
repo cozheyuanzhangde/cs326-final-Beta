@@ -1,62 +1,52 @@
-
-let useremail = '';
-document.getElementById('useremail').addEventListener('change',()=>{
-  useremail = document.getElementById('useremail').value;
-});
-
-let userpassword = '';
-document.getElementById('userpassword').addEventListener('change',()=>{
-    userpassword = document.getElementById('userpassword').value;
-});
-
-async function postAddNewUser(url = '', useremail, userpassword) {
-    await fetch(url, {
-      method: 'POST',  
-      headers: {
-        'Content-Type': "application/json"
-      }, 
-      body: JSON.stringify({ "email": useremail, "password": userpassword, "username": "Anonymous",  "schoolname": "", "gender": "", "major": ""})
-    });
-}
-
-function focusMethodE() {           
-  document.getElementById("useremail").focus();
-}
-
-function focusMethodP() {           
-  document.getElementById("userpassword").focus();
-}
-
-function focusMethodP2() {           
-  document.getElementById("confirm-userpassword").focus();
-}
-
-const myInput = document.getElementById("userpassword");
-const conf = document.getElementById("confirm-userpassword");
+const userEmailInput = document.getElementById("useremail");
+const userPwdInput = document.getElementById("userpassword");
+const userPwdConfInput = document.getElementById("confirm-userpassword");
 const letter = document.getElementById("letter");
 const number = document.getElementById("number");
 const length = document.getElementById("length");
-const e = document.getElementById("useremail");
+
+function focusMethod1() {           
+  document.getElementById("useremail").focus();
+}
+
+function focusMethod2() {           
+  document.getElementById("userpassword").focus();
+}
+
+function focusMethod3() {           
+  document.getElementById("confirm-userpassword").focus();
+}
+
+userEmailInput.addEventListener(onclick, focusMethod1);
+userPwdInput.addEventListener(onclick, focusMethod2);
+userPwdConfInput.addEventListener(onclick, focusMethod3);
 
 // When the user clicks on the password field, show the message box
-myInput.onfocus = function() {
+userPwdInput.onfocus = function() {
   document.getElementById("message").style.display = "block";
 };
 
 // When the user clicks outside of the password field, hide the message box
-myInput.onblur = function() {
+userPwdInput.onblur = function() {
   document.getElementById("message").style.display = "none";
 };
 
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function() {
-  document.getElementById("message").style.display = "none";
+function checkEmail(){
+  const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if(userEmailInput.value.match(mailformat)){
+    userEmailInput.classList.remove("wrong");
+  }else{
+    if(!userEmailInput.classList.contains("wrong")){
+      userEmailInput.classList.add("wrong");
+    }
+  }
 };
+
 // When the user starts to type something inside the password field
-myInput.onkeyup = function() {
+userPwdInput.onkeyup = function() {
   // Validate letters
   const letters = /[a-zA-Z]/g;
-  if(myInput.value.match(letters)) {  
+  if(userPwdInput.value.match(letters)) {  
     letter.classList.remove("invalid");
     letter.classList.add("valid");
   } else {
@@ -66,7 +56,7 @@ myInput.onkeyup = function() {
 
   // Validate numbers
   const numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
+  if(userPwdInput.value.match(numbers)) {  
     number.classList.remove("invalid");
     number.classList.add("valid");
   } else {
@@ -75,7 +65,7 @@ myInput.onkeyup = function() {
   }
   
   // Validate length
-  if(myInput.value.length >= 6) {
+  if(userPwdInput.value.length >= 6) {
     length.classList.remove("invalid");
     length.classList.add("valid");
   } else {
@@ -83,42 +73,19 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 };
-e.onkeyup = function(){
-  const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if(e.value.match(mailformat)){
-    e.classList.remove("wrong");
+
+userPwdConfInput.onkeyup = function() {
+  if(userPwdConfInput.value.match(userPwdInput.value)){
+    userPwdConfInput.classList.remove("wrong");
   }else{
-    if(!e.classList.contains("wrong")){
-      e.classList.add("wrong");
-    }
-  }
-};
-conf.onkeyup = function() {
-  if(conf.value.match(myInput.value)){
-    conf.classList.remove("wrong");
-  }else{
-    if(!conf.classList.contains("wrong")){
-      conf.classList.add("wrong");
+    if(!userPwdConfInput.classList.contains("wrong")){
+      userPwdConfInput.classList.add("wrong");
     }
   }
 };
 
-/*document.getElementById('submit').addEventListener('click',()=>{
-    if(useremail === ''){
-      alert("Sorry, you should enter email, please try again!");
-    }
-    else if(userpassword === ''){
-      alert("Sorry, you should enter password, please try again!");
-    }
-    else if(document.getElementById("confirm-userpassword").value === ''){
-      alert("Sorry, you should confirm password, please try again!");
-    }
-    else if(document.getElementById("confirm-userpassword").value !== userpassword){
-      alert("Sorry, you confirm password is not match with password, please try again!");
-    }
-    else{
-      postAddNewUser('/addnewuser', useremail, userpassword);
-      alert("Successful! You become a member of FindUrCourse Club!");
-      window.location.href = "./index.html";
-    }
-});*/
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
