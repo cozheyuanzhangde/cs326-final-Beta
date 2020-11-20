@@ -1,4 +1,4 @@
-CREATE TABLE users (userid SERIAL PRIMARY KEY, email VARCHAR(255), password VARCHAR(255), username VARCHAR(255), schoolname VARCHAR(255), gender VARCHAR(255), major VARCHAR(255));
+CREATE TABLE users (userid SERIAL PRIMARY KEY, email VARCHAR(255), password VARCHAR[2], username VARCHAR(255), schoolname VARCHAR(255), gender VARCHAR(255), major VARCHAR(255));
 
 CREATE TABLE courses (courseid SERIAL PRIMARY KEY, schoolname VARCHAR(255), coursesubject VARCHAR(255), coursenumber VARCHAR(255), instructor VARCHAR(255), difficulty INTEGER, time INTEGER, overall INTEGER);
 
