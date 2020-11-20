@@ -193,8 +193,7 @@ const port = process.env.PORT || 8080;
 const session = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
-    saveUninitialized: false,
-    cookie: { maxAge: 6*60*60*1000 }
+    saveUninitialized: false
 };
 
 // Passport configuration
@@ -287,11 +286,11 @@ function checkLoggedIn(req, res, next) {
     }
 }
 
-app.get('/',
+app.get('/getsession',
 	checkLoggedIn,
 	(req, res) => {
-        console.log("successfully logedin!!!");
-        res.send("hello world");
+        console.log("Successfully logged in!");
+        res.send(req.session);
 	});
 
 // Handle post data from the login.html form.
@@ -352,6 +351,8 @@ app.use(express.static('client'));
 
 app.get('*', (req, res) => {
     res.send('Error');
-});       
+});
+
+
 
 app.listen(port);
