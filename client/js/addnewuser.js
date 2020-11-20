@@ -103,7 +103,7 @@ conf.onkeyup = function() {
   }
 };
 
-document.getElementById('submit').addEventListener('click',()=>{
+/*document.getElementById('submit').addEventListener('click',()=>{
     if(useremail === ''){
       alert("Sorry, you should enter email, please try again!");
     }
@@ -121,4 +121,4 @@ document.getElementById('submit').addEventListener('click',()=>{
       alert("Successful! You become a member of FindUrCourse Club!");
       window.location.href = "./index.html";
     }
-});
+});*/
