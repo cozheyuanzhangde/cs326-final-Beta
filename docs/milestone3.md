@@ -37,3 +37,19 @@ CREATE TABLE coursecomments (courseid INTEGER, username VARCHAR(255), textcommen
 | difficulty | INTEGER | Course Comment Difficulty |
 | time | INTEGER | Course Comment Time Consumption |
 | overall | INTEGER | Course Comment Overall Evaluation |
+
+## Breakdown of the Division of Labor
+
+Zheyuan(Brian) Zhang (Email: zheyuanzhang@umass.edu Github: cozheyuanzhangde) :
+
+ 1. Database Structure Design and Construction.
+ 2. Constructed back-end endpoints /addNewUser, /addNewCourse, /addNewComment, /updateUserInfoByUserID, /updateUserInfoNoPWDChangeByUserID, /updateCourseInfoByCommentsAVG(Update the average scores(difficulty, time, overall) for a course with provided courseID), /loadCourseByCourseID, /loadCoursesBySchoolSubjectNumber, /loadCoursesBySchoolSubject, /loadCoursesBySchool, /loadCoursecommentsByCourseID.
+ 3. Front-end Interaction/Design with the endpoints stated in 2(back-end endpoints).
+ 4. Rank courses by Difficulty/Time Consumption and Overall with options ascending and descending.
+ 5. Session working with Postgres Database (consistent).
+ 6. Fetch Session information in front-end with an endpoints in back-end.
+ 7. Front-end alert HTMLs/Javascripts which can be used for back-end response.
+ 8. Hash encryption for user password by minicrypt.
+ 9. 
+Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
+Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
