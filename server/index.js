@@ -90,11 +90,11 @@ async function loadCoursecommentsByCourseID(courseid) {
 }
 
 async function checkUserExistByEmail(email) {
-    return await connectAndRun(db => db.one("SELECT * FROM users WHERE email = $1;", [email]));
+    return await connectAndRun(db => db.any("SELECT * FROM users WHERE email = $1;", [email]));
 }
 
 async function loadUserInfoByUserID(userid) {
-    return await connectAndRun(db => db.one("SELECT * FROM users WHERE userid = $1;", [userid]));
+    return await connectAndRun(db => db.any("SELECT * FROM users WHERE userid = $1;", [userid]));
 }
 
 async function delateCourseByCourseID(courseid) {
@@ -180,6 +180,7 @@ app.get("/loaduserinfobyuserid", async (req, res) => {
 });
 
 //Session/Cookie starts from here.
+//Very important, variables username below are all represented for user_email, not actual username!
 
 require('dotenv').config();
 
@@ -200,11 +201,11 @@ const session = {
 
 const strategy = new LocalStrategy(
     async (username, password, done) => {
-	if (!findUser(username)) {
+	if (await findUser(username) === false) {
         // no such user
-        return done(null, false, { 'message' : 'Wrong username' });
+        return done(null, false, { 'message' : 'Wrong useremail' });
         }
-        if (!validatePassword(username, password)) {
+        if (await validatePassword(username, password) === false) {
         // invalid password
         // should disable logins after N messages
         // delay return to rate-limit brute-force attacks
@@ -237,24 +238,27 @@ app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 
 /////
 
-// we use an in-memory "database"; this isn't persistent but is easy
-const users = { 'emery' : 'compsci326' }; // default user
-
 // Returns true iff the user exists.
-function findUser(username) {
-    if (!users[username]) {
-	return false;
+async function findUser(email) {
+    const selectedUser = await checkUserExistByEmail(email);
+    console.log(selectedUser);
+    if (selectedUser.length === 0) {
+        console.log("false");
+        return false;
     } else {
-	return true;
+        console.log("true");
+        return true;
     }
 }
 
 // Returns true iff the password is the one we have stored (in plaintext = bad but easy).
-function validatePassword(name, pwd) {
-    if (!findUser(name)) {
+async function validatePassword(email, pwd) {
+    if (!findUser(email)) {
 	return false;
     }
-    if (users[name] !== pwd) {
+    const selectedUser = await checkUserExistByEmail(email);
+    console.log(selectedUser[0]);
+    if (selectedUser[0].password !== pwd) {
 	return false;
     }
     return true;
@@ -263,15 +267,13 @@ function validatePassword(name, pwd) {
 // Add a user to the "database".
 // Return true if added, false otherwise (because it was already there).
 // TODO
-function addUser(name, pwd) {
-	if(findUser(name) === false){
-		users[name] = pwd;
+async function addUser(email, pwd) {
+	if(await findUser(email) === false){
+        await addNewUser(email, pwd, "Anonymous", "", "", "");
 		return true;
-	}
-	else{
+	}else{
 		return false;
 	}
-    // TODO
 }
 
 // Routes
@@ -328,10 +330,10 @@ app.get('/logout', (req, res) => {
 // Use res.redirect to change URLs.
 // TODO
 app.post('/signup',
-    (req, res) => {
+    async (req, res) => {
         const username = req.body['username'];
         const password = req.body['password'];
-        if(addUser(username,password) === true){
+        if(await addUser(username,password) === true){
             res.redirect('/login');
         }
         else{
