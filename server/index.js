@@ -270,7 +270,7 @@ async function validatePassword(email, pwd) {
 async function addUser(email, pwd) {
 	if(await findUser(email) === false){
         await addNewUser(email, pwd, "Anonymous", "", "", "");
-		return true;
+        return true;
 	}else{
 		return false;
 	}
