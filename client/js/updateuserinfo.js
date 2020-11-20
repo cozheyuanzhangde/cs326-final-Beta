@@ -52,7 +52,7 @@ async function updateUserInfoNoPWDChange(url = '', userid, useremail, username, 
 
 document.getElementById('submit').addEventListener('click',()=>{
     if (userpassword === ""){
-      if(usermail === ""){
+      if(useremail === ""){
         alert("Sorry, you should enter Email, please try again!");
       }
       else if(username === ""){
@@ -73,7 +73,7 @@ document.getElementById('submit').addEventListener('click',()=>{
         location.reload();
       }
     }else{
-      if(usermail === ""){
+      if(useremail === ""){
         alert("Sorry, you should enter Email, please try again!");
       }
       else if(username === ""){
