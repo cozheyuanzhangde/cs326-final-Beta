@@ -299,14 +299,19 @@ app.get('/getsession',
 app.post('/login', 
     passport.authenticate('local' , {     // use username/password authentication
         'successRedirect' : '/private',   // when we login, go to /private 
-        'failureRedirect' : '/login.html'      // otherwise, back to login
+        'failureRedirect' : '/loginfailure'      // otherwise, back to login
     }));
+
+app.get('/loginfailure',
+     (req, res) => {
+         console.log("loginfailed");
+         res.sendFile('client/alertloginfailed.html',
+         { 'root' : './'});
+     });
 
 app.get('/private',
      checkLoggedIn, // If we are logged in (notice the comma!)...
      (req, res) => {             // Go to the user's page.
-        //  const httpSession = req.getSession();
-        //  httpSession.setAttribute("login", "loggedin!!!");
          res.redirect('/index.html');
      });
 
@@ -334,10 +339,12 @@ app.post('/signup',
         const username = req.body['username'];
         const password = req.body['password'];
         if(await addUser(username,password) === true){
-            res.redirect('/login');
+            res.sendFile('client/alertsignupsuccess.html',
+            { 'root' : './'});
         }
         else{
-            res.redirect('/signup');
+            res.sendFile('client/alertuserexisted.html',
+            { 'root' : './'});
         }
         // TODO
         // Check if we successfully added the user.
