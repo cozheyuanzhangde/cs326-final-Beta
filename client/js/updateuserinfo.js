@@ -1,3 +1,6 @@
+const minicrypt = require('./miniCrypt');
+const mc = new minicrypt();
+
 let useremail = '';
 useremail = document.getElementById('useremail').value;
 
@@ -89,7 +92,8 @@ document.getElementById('submit').addEventListener('click',()=>{
         alert("Sorry, you should enter Major, please try again!");
       }
       else{
-        updateUserInfo('/updateuserinfo', userid, useremail, userpassword, username, userschoolname, usergender, usermajor);
+        const [salt, hash] = mc.hash(userpassword);
+        updateUserInfo('/updateuserinfo', userid, useremail, [salt, hash], username, userschoolname, usergender, usermajor);
         alert("You have successfully changed your user profile!");
         location.reload();
       }  
