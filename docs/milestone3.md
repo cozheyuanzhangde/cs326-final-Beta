@@ -73,5 +73,12 @@ Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
  11. Session debug.
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
- 1. 
+ 1. Build framework about back-end endpoints.
+ 2. Constructed back-end endpoints.
+ 3. Front-end email validation checking using regex (anything@anything.anything).
+ 4. Front-end alert that user need to input in userinfo page (every input with specific id), if missing any input, alert and jump back to the same page.
+ 5. Build session framework.
+ 6. Session working with local storage.
+ 7. Session check on signup page that only can susscessfully signup with the correct email and password.
+ 8. Session debug and perfection.
  
