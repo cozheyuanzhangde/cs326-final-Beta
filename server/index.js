@@ -290,7 +290,7 @@ async function addUser(email, pwd) {
 	}
 }
 
-// Routes
+
 
 function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -309,11 +309,11 @@ app.get('/getsession',
         res.send(req.session);
 	});
 
-// Handle post data from the login.html form.
+
 app.post('/login', 
-    passport.authenticate('local' , {     // use username/password authentication
-        'successRedirect' : '/private',   // when we login, go to /private 
-        'failureRedirect' : '/loginfailure'      // otherwise, back to login
+    passport.authenticate('local' , {     
+        'successRedirect' : '/private',   
+        'failureRedirect' : '/loginfailure'      
     }));
 
 app.get('/loginfailure',
@@ -324,8 +324,8 @@ app.get('/loginfailure',
      });
 
 app.get('/private',
-     checkLoggedIn, // If we are logged in (notice the comma!)...
-     (req, res) => {             // Go to the user's page.
+     checkLoggedIn, 
+     (req, res) => {             
          res.redirect('/index.html');
      });
 
@@ -335,20 +335,14 @@ app.get('/login',
     (req, res) => res.sendFile('client/login.html',
     { 'root' : './'}));
 
-// Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
     req.logout(); // Logs us out!
     res.sendFile('client/index.html',
-    { 'root' : './'}); // back to login
+    { 'root' : './'}); 
 });
 
 
 
-// Add a new user and password IFF one doesn't exist already.
-// If we successfully add a new user, go to /login, else, back to /register.
-// Use req.body to access data (as in, req.body['username']).
-// Use res.redirect to change URLs.
-// TODO
 app.post('/signup',
     async (req, res) => {
         const username = req.body['username'];
@@ -361,10 +355,6 @@ app.post('/signup',
             res.sendFile('client/alertuserexisted.html',
             { 'root' : './'});
         }
-        // TODO
-        // Check if we successfully added the user.
-        // If so, redirect to '/login'
-        // If not, redirect to '/register'.
     });
 
 // Register URL
