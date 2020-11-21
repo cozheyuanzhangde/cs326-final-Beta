@@ -112,8 +112,8 @@ async function delateCoursecommentsByCourseID(courseid) {
     return await connectAndRun(db => db.one("DELETE FROM coursecomments WHERE courseid = $1;", [courseid]));
 }
 
-async function delateUserByUserID(courseid) {
-    return await connectAndRun(db => db.one("DELETE FROM users WHERE userid = $1;", [userid]));
+async function delateUserByUserID(userid) {
+    return await connectAndRun(db => db.none("DELETE FROM users WHERE userid = $1;", [userid]));
 }
 
 
