@@ -60,7 +60,25 @@ Zheyuan(Brian) Zhang (Email: zheyuanzhang@umass.edu Github: cozheyuanzhangde) :
  14. All comments will use the username defined by session info user email. (username fetched from database by user email to front-end.)
  
 Jenny Guo (Email: jyguo@umass.edu Github: jennyg1017):
- 1. List item
- 2. 
+ 1. Build framework about back-end endpoints.
+ 2. Constructed back-end endpoints.
+ 3. Front-end password validation checking using regex (at least 6 letterts/at least one letter/at least one number).
+ 4. Front-end textbar focus(login/signup/userinfo).
+ 5. Front-end textbar validation checking (invalid--red, valid--green).
+ 6. Front-end alert that user need to input in login/signup page (every input with specific id), if missing any input, alert and jump back to the same page.
+ 7. Front-end beautification. 
+ 8. Build session framework.
+ 9. Session working with local storage.
+ 10. Session check on login page that only can susscessfully signin with the correct password. (after signup)
+ 11. Session debug.
 
 Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
+ 1. Build framework about back-end endpoints.
+ 2. Constructed back-end endpoints.
+ 3. Front-end email validation checking using regex (anything@anything.anything).
+ 4. Front-end alert that user need to input in userinfo page (every input with specific id), if missing any input, alert and jump back to the same page.
+ 5. Build session framework.
+ 6. Session working with local storage.
+ 7. Session check on signup page that only can susscessfully signup with the correct email and password.
+ 8. Session debug and perfection.
+ 
