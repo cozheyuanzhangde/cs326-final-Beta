@@ -152,9 +152,38 @@ async function updateCourseInfo(url = '', courseid){
     });
 }
 
-document.getElementById('cd-submit').addEventListener('click', () => {
-    postNewComment('/addnewcomment', this_courseId, 'Anonymous', post_comment, post_coursedifficulty, post_coursetime, post_courseoverall);
-    updateCourseInfo('/updatecourseinfo', this_courseId);
-    alert("You successfully add a new comment!");
-    location.reload();
+document.getElementById('cd-submit').addEventListener('click', async () => {
+    let thissession;
+    let sessionEmail;
+    try{
+        const res_session = await fetch(`/getsession`,{
+        method: "GET"
+        });
+        if (!res_session.ok) {
+        console.log(res_session.error);
+        return;
+        }else{
+        thissession = await res_session.json();
+        sessionEmail = thissession.passport.user;
+        console.log(sessionEmail);
+        }
+        const res_user = await fetch(`/loaduserinfobyemail?email=${sessionEmail}`,{
+            method: "GET"
+        });
+        if (!res_user.ok) {
+            console.log(res_user.error);
+            return;
+        }
+        const user = await res_user.json();
+        console.log(user);
+        const username = user[0].username;
+        console.log(username);
+        postNewComment('/addnewcomment', this_courseId, username, post_comment, post_coursedifficulty, post_coursetime, post_courseoverall);
+        updateCourseInfo('/updatecourseinfo', this_courseId);
+        alert("You successfully add a new comment!");
+        location.reload();
+    }catch(error){
+        alert("Please Login first and then comment a course! If you don't have an account, register one!");
+        window.location.href="./login.html";
+    }
 });
