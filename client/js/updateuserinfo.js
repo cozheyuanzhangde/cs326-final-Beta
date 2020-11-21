@@ -55,47 +55,13 @@ async function updateUserInfoNoPWDChange(url = '', userid, useremail, username, 
 
 document.getElementById('submit').addEventListener('click',()=>{
     if (userpassword === ""){
-      if(useremail === ""){
-        alert("Sorry, you should enter Email, please try again!");
-      }
-      else if(username === ""){
-        alert("Sorry, you should enter Name/Nickname, please try again!");
-      }
-      else if(userschoolname === ""){
-        alert("Sorry, you should enter School Name, please try again!");
-      }
-      else if(usergender === ""){
-        alert("Sorry, you should enter Gender, please try again!");
-      }
-      else if(usermajor === ""){
-        alert("Sorry, you should enter Major, please try again!");
-      }
-      else{
-        updateUserInfoNoPWDChange('/updateuserinfonopwdchange', userid, useremail, username, userschoolname, usergender, usermajor);
-        alert("You have successfully changed your user profile!");
-        location.reload();
-      }
+      updateUserInfoNoPWDChange('/updateuserinfonopwdchange', userid, useremail, username, userschoolname, usergender, usermajor);
+      alert("You have successfully updated your user profile!");
+      location.reload();
     }else{
-      if(useremail === ""){
-        alert("Sorry, you should enter Email, please try again!");
-      }
-      else if(username === ""){
-        alert("Sorry, you should enter Name/Nickname, please try again!");
-      }
-      else if(userschoolname === ""){
-        alert("Sorry, you should enter School Name, please try again!");
-      }
-      else if(usergender === ""){
-        alert("Sorry, you should enter Gender, please try again!");
-      }
-      else if(usermajor === ""){
-        alert("Sorry, you should enter Major, please try again!");
-      }
-      else{
-        const [salt, hash] = mc.hash(userpassword);
-        updateUserInfo('/updateuserinfo', userid, useremail, [salt, hash], username, userschoolname, usergender, usermajor);
-        alert("You have successfully changed your user profile!");
-        location.reload();
-      }  
+      const [salt, hash] = mc.hash(userpassword);
+      updateUserInfo('/updateuserinfo', userid, useremail, [salt, hash], username, userschoolname, usergender, usermajor);
+      alert("You have successfully updated your user profile!");
+      location.reload();
     }
 });
