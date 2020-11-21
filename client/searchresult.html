@@ -11,6 +11,7 @@
       <meta charset="UTF-8" />
       <script src = "./js/loadsearchresult.js" defer></script>
       <script src = "./js/searchbar.js" defer></script>
+      <script src = "./js/fetchsessiondisplay.js" defer></script>
       <title>FindUrCourse! - Search Result</title>
    </head>
    <body class="text-dark list-group-item-secondary" >
@@ -43,15 +44,20 @@
               </div>
             </ul>
             <ul class='nav navbar-nav navbar-right'>
-               <li class="nav-item">
-                  <a class="nav-link" href="./userinfo.html"><span class="fas fa-user"></span> User Profile</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="./signup.html"><span class="fas fa-user-plus"></span> Sign Up</a>
-               </li>
-               <li class="nav-item">
+               <li id="navsignup" class="nav-item">
+                  <a class="nav-link" href="./signup.html" id="indexsignup"><span class="fas fa-user-plus"></span> Sign Up</a>
+              </li>
+              <li id="navlogin" class="nav-item">
                   <a class="nav-link" href="./login.html"><span class="fas fa-sign-in-alt"></span> Login</a>
-               </li>
+              </li>
+              <li id="navuserhome" class="nav-item dropdown">
+                <a id="navuseremail" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a id="navuserinfo" class="dropdown-item" href="./userinfo.html"><span class="fas fa-user"></span> User Profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a id="navlogout" class="dropdown-item" href="#"><span class="fas fa-sign-out-alt"></span> Log out</a>
+                </div>
+              </li>
             </ul>
          </div>
       </nav>
