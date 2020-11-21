@@ -100,6 +100,10 @@ async function loadUserInfoByUserID(userid) {
     return await connectAndRun(db => db.any("SELECT * FROM users WHERE userid = $1;", [userid]));
 }
 
+async function loadUserInfoByEmail(useremail) {
+    return await connectAndRun(db => db.any("SELECT * FROM users WHERE email = $1;", [useremail]));
+}
+
 async function delateCourseByCourseID(courseid) {
     return await connectAndRun(db => db.one("DELETE FROM courses WHERE courseid = $1;", [courseid]));
 }
@@ -180,6 +184,11 @@ app.get("/checkuserexistbyemail", async (req, res) => {
 
 app.get("/loaduserinfobyuserid", async (req, res) => {
     const user = await loadUserInfoByUserID(req.query.userid);    
+    res.send(JSON.stringify(user));
+});
+
+app.get("/loaduserinfobyemail", async (req, res) => {
+    const user = await loadUserInfoByEmail(req.query.email);    
     res.send(JSON.stringify(user));
 });
 
@@ -329,7 +338,8 @@ app.get('/login',
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
     req.logout(); // Logs us out!
-    res.redirect('/login'); // back to login
+    res.sendFile('client/index.html',
+    { 'root' : './'}); // back to login
 });
 
 
