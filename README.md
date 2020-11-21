@@ -16,4 +16,6 @@ This is the Github Repo for CS326 Final Project - Find Ur Course!
 
 >  **server** - Server Side
  - index.js - server
- - database.json - temporary database flat json file
+ - miniCrypt.js - for password encryption
+
+>  **back-up-files** - back-up
