@@ -50,8 +50,11 @@ async function postAddNewCourse(url = '', courseschoolname, coursesubject, cours
 }
 
 document.getElementById('submit').addEventListener('click', async () => {
-  console.log(courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, 'Anonymous', coursecomment);
-  postAddNewCourse('/addnewcourse', courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, 'Anonymous', coursecomment);
-  alert("Well Done! You successfully add a new course with a comment!");
-  window.location.href = "./index.html";
+  if((courseschoolname.length>0)&&(coursesubject.length>0)&&(coursenumber.length>0)&&(courseinstructor.length>0)&&(coursedifficulty.length>0)&&(courseoverall.length>0)&&(coursecomment.length>0)){
+    postAddNewCourse('/addnewcourse', courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, 'Anonymous', coursecomment);
+    alert("Well Done! You successfully add a new course with a comment!");
+    window.location.href = "./index.html";
+  }else{
+    alert("Sorry, you need to enter all fields to add a new course!");
+  }
 });
