@@ -48,13 +48,42 @@ async function postAddNewCourse(url = '', courseschoolname, coursesubject, cours
     body: JSON.stringify({ "schoolname": courseschoolname, "coursesubject": coursesubject, "coursenumber": coursenumber, "instructor": courseinstructor, "difficulty": coursedifficulty, "time": coursetime, "overall": courseoverall, "username": username, "textcomment": textcomment})
   });
 }
-
-document.getElementById('submit').addEventListener('click', async () => {
-  if((courseschoolname.length>0)&&(coursesubject.length>0)&&(coursenumber.length>0)&&(courseinstructor.length>0)&&(coursedifficulty.length>0)&&(courseoverall.length>0)&&(coursecomment.length>0)){
-    postAddNewCourse('/addnewcourse', courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, 'Anonymous', coursecomment);
-    alert("Well Done! You successfully add a new course with a comment!");
-    window.location.href = "./index.html";
-  }else{
-    alert("Sorry, you need to enter all fields to add a new course!");
+window.addEventListener("load", async function (){
+  let thissession;
+  let sessionEmail;
+  try{
+      const res_session = await fetch(`/getsession`,{
+      method: "GET"
+      });
+      if (!res_session.ok) {
+      console.log(res_session.error);
+      return;
+      }else{
+      thissession = await res_session.json();
+      sessionEmail = thissession.passport.user;
+      console.log(sessionEmail);
+      }
+      const res_user = await fetch(`/loaduserinfobyemail?email=${sessionEmail}`,{
+          method: "GET"
+      });
+      if (!res_user.ok) {
+          console.log(res_user.error);
+          return;
+      }
+      const user = await res_user.json();
+      console.log(user);
+      const username = user[0].username;
+      document.getElementById('submit').addEventListener('click', async () => {
+        if((courseschoolname.length>0)&&(coursesubject.length>0)&&(coursenumber.length>0)&&(courseinstructor.length>0)&&(coursedifficulty.length>0)&&(courseoverall.length>0)&&(coursecomment.length>0)){
+          postAddNewCourse('/addnewcourse', courseschoolname, coursesubject, coursenumber, courseinstructor, coursedifficulty, coursetime, courseoverall, username, coursecomment);
+          alert("Well Done! You successfully add a new course with a comment!");
+          window.location.href = "./index.html";
+        }else{
+          alert("Sorry, you need to enter all fields to add a new course!");
+        }
+      });
+  }catch(error){
+      alert("Please Login first and then add a new course! If you don't have an account, register one!");
+      window.location.href="./login.html";
   }
 });
