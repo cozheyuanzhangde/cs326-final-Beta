@@ -1,5 +1,20 @@
-const minicrypt = require('./miniCrypt');
-const mc = new minicrypt();
+const userid = 1; //For Testing Purpose
+
+window.addEventListener("load", async function (){
+  const res_user = await fetch(`/loaduserinfobyuserid?userid=${userid}`,{
+      method: "GET"
+  });
+  if (!res_user.ok) {
+      console.log(res_user.error);
+      return;
+  }
+  const user = await res_user.json();
+  document.getElementById('useremail').value = user[0].email;
+  username = document.getElementById('username').value = user[0].username;
+  userschoolname = document.getElementById('userschoolname').value = user[0].schoolname;
+  usergender = document.getElementById('usergender').value = user[0].gender;
+  usermajor = document.getElementById('usermajor').value = user[0].major;
+});
 
 let useremail = '';
 useremail = document.getElementById('useremail').value;
@@ -29,8 +44,6 @@ document.getElementById('usermajor').addEventListener('change',()=>{
     usermajor = document.getElementById('usermajor').value;
 });
 
-const userid = 1; //For Testing Purpose
-
 console.log(useremail);
 
 async function updateUserInfo(url = '', userid, useremail, userpassword, username, userschoolname, usergender, usermajor) {
@@ -59,8 +72,7 @@ document.getElementById('submit').addEventListener('click',()=>{
       alert("You have successfully updated your user profile!");
       location.reload();
     }else{
-      const [salt, hash] = mc.hash(userpassword);
-      updateUserInfo('/updateuserinfo', userid, useremail, [salt, hash], username, userschoolname, usergender, usermajor);
+      updateUserInfo('/updateuserinfo', userid, useremail, userpassword, username, userschoolname, usergender, usermajor);
       alert("You have successfully updated your user profile!");
       location.reload();
     }
