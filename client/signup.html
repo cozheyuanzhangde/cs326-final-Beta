@@ -28,25 +28,27 @@
             <div class="col">
                 <br>
                 <div class="row-sm-5">
-                    <input type="text" class="form-control rounded-pill text-center" id="useremail" placeholder="Email" name="username" oninput="checkEmail()">
+                    <input type="text" class="form-control rounded-pill text-center" id="useremail" placeholder="Email" name="username"/>
+                    <div id="emailalert" class="customAlert">Email Format not Correct</div>
                     <br>
                 </div>
                 <br>
                 <div class="row-sm-5">
-                    <input type="password" class="form-control rounded-pill text-center" id="userpassword" placeholder="Password" name="password">
+                    <input type="password" class="form-control rounded-pill text-center" id="userpassword" placeholder="Password" name="password"/>
+                    <div id="pwdalert" class="customAlert">Password is Too Weak</div>
+                    <div id="message">
+                        <h5>Password must contain the following:</h5>
+                        <p id="letter" class="invalid">A <b>letter</b></p>
+                        <p id="number" class="invalid">A <b>number</b></p>
+                        <p id="length" class="invalid">Minimum <b>6 characters</b></p>
+                    </div>
                     <br>
                 </div>
                 <br>
                 <div class="row-sm-5">
-                    <input type="password" class="form-control rounded-pill text-center" id="confirm-userpassword" placeholder="Confirm Password">
+                    <input type="password" class="form-control rounded-pill text-center" id="confirm-userpassword" placeholder="Confirm Password"/>
+                    <div id="confpwdalert" class="customAlert">Confirm Password and Password not Match</div>
                     <br>
-                </div>
-                
-                <div id="message">
-                    <h5>Password must contain the following:</h5>
-                    <p id="letter" class="invalid">A <b>letter</b></p>
-                    <p id="number" class="invalid">A <b>number</b></p>
-                    <p id="length" class="invalid">Minimum <b>6 characters</b></p>
                 </div>
                 <br>
                 <div class="text-center">
