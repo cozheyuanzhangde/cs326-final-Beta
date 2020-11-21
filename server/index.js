@@ -1,6 +1,9 @@
 const express = require("express");
+const minicrypt = require('./miniCrypt');
+const mc = new minicrypt();
+
 let secrets;
-// var path = require('path');
+
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -129,7 +132,8 @@ app.post("/addnewcomment", async (req, res) => {
 });
 
 app.post("/updateuserinfo", async (req, res) => {
-    await updateUserInfoByUserID(req.body.userid, req.body.email, req.body.password, req.body.username, req.body.schoolname, req.body.gender, req.body.major);
+    const [salt, hash] = mc.hash(req.body.password);
+    await updateUserInfoByUserID(req.body.userid, req.body.email, [salt, hash], req.body.username, req.body.schoolname, req.body.gender, req.body.major);
     res.send("OK");
 });
 
@@ -188,11 +192,8 @@ const expressSession = require('express-session');  // for managing session stat
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
 const port = process.env.PORT || 8080;
-const minicrypt = require('./miniCrypt');
 
 // Session configuration
-
-const mc = new minicrypt();
 
 const session = {
     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
