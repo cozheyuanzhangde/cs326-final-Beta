@@ -107,7 +107,18 @@ userPwdInput.onkeyup = function() {
     document.getElementById("pwdalert").style.visibility = "visible";
     valid2 = false;
   }
-  console.log(valid1,valid2,valid3);
+  
+  if(userPwdConfInput.value === userPwdInput.value){
+    userPwdConfInput.classList.remove("btn-outline-danger");
+    userPwdConfInput.classList.add("btn-outline-success");
+    document.getElementById("confpwdalert").style.visibility = "hidden";
+    valid3 = true;
+  }else{
+    userPwdConfInput.classList.add("btn-outline-danger");
+    userPwdConfInput.classList.remove("btn-outline-success");
+    document.getElementById("confpwdalert").style.visibility = "visible";
+    valid3 = false;
+  }
   if((valid1 === true)&&((valid2 === true))&&((valid3 === true))){
     document.getElementById("submit").disabled = false;
   }else{
@@ -127,7 +138,6 @@ userPwdConfInput.onkeyup = function() {
     document.getElementById("confpwdalert").style.visibility = "visible";
     valid3 = false;
   }
-  console.log(valid1,valid2,valid3);
   if((valid1 === true)&&((valid2 === true))&&((valid3 === true))){
     document.getElementById("submit").disabled = false;
   }else{
