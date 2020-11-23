@@ -209,7 +209,7 @@ const port = process.env.PORT || 8080;
 // Session configuration
 
 const session = {
-    secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
+    secret : process.env.SECRET || 'SECRET', // encryption key already set in Heroku and 'SECRET' is for local testing.
     resave : false,
     saveUninitialized: false
 };
