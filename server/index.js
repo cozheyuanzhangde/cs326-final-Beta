@@ -283,7 +283,7 @@ async function validatePassword(email, pwd) {
 
 // Add a user to the "database".
 // Return true if added, false otherwise (because it was already there).
-// TODO
+
 async function addUser(email, pwd) {
 	if(await findUser(email) === false){
         const [salt, hash] = mc.hash(pwd);

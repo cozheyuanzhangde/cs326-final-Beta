@@ -12,22 +12,6 @@ document.getElementById("submit").disabled = true;
 
 let valid1, valid2, valid3 = false;
 
-/*function focusMethod1() {           
-  document.getElementById("useremail").focus();
-}
-
-function focusMethod2() {           
-  document.getElementById("userpassword").focus();
-}
-
-function focusMethod3() {           
-  document.getElementById("confirm-userpassword").focus();
-}
-
-userEmailInput.addEventListener(onclick, focusMethod1);
-userPwdInput.addEventListener(onclick, focusMethod2);
-userPwdConfInput.addEventListener(onclick, focusMethod3);*/
-
 // When the user clicks on the password field, show the message box
 userPwdInput.onfocus = function() {
   document.getElementById("message").style.display = "block";
