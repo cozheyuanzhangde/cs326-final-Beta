@@ -181,4 +181,4 @@ Fangming Cheng (Email: fangmingchen@umass.edu Github: FangmingCCC):
 The front-end design is basically based on bootstrap and we learned many stuffs in bootstrap for constructing a front-end user interface. For example, navbars, jumbotrons, and sizing like cols, margins...
 The back-end server design is the most difficult part in this project. We learned how to constructing endpoints for front-end interaction. Database construction needs very precise understanding of our app so we know the importance of a database will perform in modern web applications. We also gain experience of how hashing the password and put that into the database. In addition, working with session is also a challenging topic but very interesting. Difficulties including session retrieval in front-end and display it on the top right corner as a normal website will do take me days to actually perform it. Those experiences in modern web developing is very precious and interesting. 
 
-### Youtube Link to Video Demo: 
+### Youtube Link to Video Demo: https://youtu.be/jBqNtiiWUc8
