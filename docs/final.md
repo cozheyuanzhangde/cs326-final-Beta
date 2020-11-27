@@ -17,7 +17,7 @@ This app is created for students who want to find their desired courses. Student
 ### User Interface: 
 ### Index home page (main page for findurcourse):
 ![Index page](final_images/f1.JPG)
-### Search result page (display courses after searching from either main page or search bar on other pages):
+### Search result page (display courses after searching from either main page or search bar on other pages. User can rank(sort) courses by difficulty, time consumption, overall):
 ![Index page](final_images/f2.JPG)
 ### Course detail page (display course detail include comments/add comments after clicking the course in search result page):
 ![Index page](final_images/f3.JPG)
